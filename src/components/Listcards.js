@@ -8,7 +8,6 @@ const Listcards = () => {
  const [page, setPage] = useState(1);
  const { results, isLoading, isError, error, hasNextPage } = useCards(page);
 
- const lastCardInPost = useRef();
  const fetchMoreCards = () => {
   if (hasNextPage) {
    setPage((prev) => prev + 1);
@@ -17,22 +16,9 @@ const Listcards = () => {
 
  if (isError) return <Typography>{error.message}</Typography>;
 
- //  const content = results.map((card, i) => {
- //   console.log("card ", card);
- //   if (results.length === i + 1) {
- //    return (
- //     <Card ref={lastCardInPost} key={card.id} card={card}>
- //      {card.name}
- //     </Card>
- //    );
- //   }
- //   return <Card key={card.id} card={card}></Card>;
- //  });
-
  return (
   <Container>
    <Box>
-    {/* {content} */}
     <InfiniteScroll
      dataLength={results.length} // to let InfiniteScroll know how many items are already rendered
      next={fetchMoreCards} // fetches next data. Contains previous and next data

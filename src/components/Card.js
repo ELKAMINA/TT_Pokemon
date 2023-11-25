@@ -12,9 +12,18 @@ const Img = styled("img")({
  maxHeight: "100%",
 });
 
-const Card = React.forwardRef(({ card }, ref) => {
- const cardBody = (
-  <>
+const Card = ({ card }) => {
+ const content = (
+  <Paper
+   sx={{
+    p: 2,
+    margin: "auto",
+    maxWidth: 500,
+    flexGrow: 1,
+    backgroundColor: (theme) =>
+     theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+   }}
+  >
    <Grid container spacing={2}>
     <Grid item>
      <ButtonBase sx={{ width: 128, height: 128 }}>
@@ -45,38 +54,10 @@ const Card = React.forwardRef(({ card }, ref) => {
      </Grid>
     </Grid>
    </Grid>
-  </>
+  </Paper>
  );
 
- const content = ref ? (
-  <Paper
-   sx={{
-    p: 2,
-    margin: "auto",
-    maxWidth: 500,
-    flexGrow: 1,
-    backgroundColor: (theme) =>
-     theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-   }}
-   ref={ref}
-  >
-   {cardBody}
-  </Paper>
- ) : (
-  <Paper
-   sx={{
-    p: 2,
-    margin: "auto",
-    maxWidth: 500,
-    flexGrow: 1,
-    backgroundColor: (theme) =>
-     theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-   }}
-  >
-   {cardBody}
-  </Paper>
- );
  return content;
-});
+};
 
 export default Card;
