@@ -13,6 +13,7 @@ const Img = styled("img")({
 });
 
 const Card = ({ card }) => {
+ //  console.log("card", card.name);
  const content = (
   <Paper
    sx={{
@@ -27,7 +28,7 @@ const Card = ({ card }) => {
    <Grid container spacing={2}>
     <Grid item>
      <ButtonBase sx={{ width: 128, height: 128 }}>
-      <Img alt="complex" src={card.images.large} />
+      <Img alt="complex" src={card.images?.large} />
      </ButtonBase>
     </Grid>
     <Grid item xs={12} sm container>
