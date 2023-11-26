@@ -10,12 +10,17 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { TextField } from "@mui/material";
 import "../../styles/items.styles.css";
+import { pricing } from "../../utils/pricing";
 
 function Item({ card }) {
  const allItemsInCart = useAppSelector(selectCartItems);
  const totalUniqueItem = allItemsInCart.find(
   (item) => item.id === card.id
  )?.quantity;
+
+ const cardPrice = card.cardmarket?.prices?.averageSellPrice
+  ? pricing(card.cardmarket?.prices?.averageSellPrice).toFixed(2)
+  : 1;
  const dispatch = useAppDispatch();
 
  const handleAddToCartClick = () => {
@@ -53,9 +58,9 @@ function Item({ card }) {
       marginTop: "20px",
      }}
     >
-     <Typography variant="p"> Unit price: {card.price}</Typography>
+     <Typography variant="p"> Unit price: {cardPrice + "€"}</Typography>
      <Typography variant="p">
-      Total price: {(totalUniqueItem * card.price).toFixed(2)}
+      Total price: {(totalUniqueItem * cardPrice).toFixed(2) + "€"}
      </Typography>
     </Box>
 
