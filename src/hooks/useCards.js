@@ -61,7 +61,7 @@ const useCards = (page = 1) => {
 
   lastQuery.current = query;
   //   return () => abortController.abort(); // Cancel the request when the component is unmounting
- }, [page]);
+ }, [page, query]);
 
  return { results, isLoading, isError, error, hasNextPage };
 };
