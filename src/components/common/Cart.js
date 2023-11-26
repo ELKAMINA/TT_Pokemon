@@ -8,6 +8,7 @@ import {
 } from "../../redux/slices/cartSlice";
 import Item from "./Item";
 import Divider from "@mui/material/Divider";
+import { pricing } from "../../utils/pricing";
 
 const StyledDrawer = styled(Drawer)(({ theme }) => ({
  ".MuiDrawer-paper": {
@@ -19,14 +20,21 @@ const Cart = () => {
  const dispatch = useAppDispatch();
  const openCart = useAppSelector(selectOpenCart);
  const itemsInCart = useAppSelector(selectCartItems);
- const calculateTotalPrice = (itemsInCart) => {
-  itemsInCart.reduce((acc, item) => {
-   return acc + item.price * item.quantity;
+ const calculateTotalPrice = (it) => {
+  return it.reduce((acc, item) => {
+   const itemPrice = item.cardmarket?.prices?.averageSellPrice
+    ? pricing(item.cardmarket?.prices?.averageSellPrice).toFixed(3)
+    : 1;
+   console.log("itemPrice", itemPrice);
+   console.log("itemQuantity", item.quantity);
+   return acc + itemPrice * item.quantity;
   }, 0);
  };
  const handleCloseCart = () => {
   dispatch(setOpenCart(false));
  };
+
+ console.log("itemsInCart", itemsInCart);
  return (
   <StyledDrawer anchor="right" open={openCart} onClose={handleCloseCart}>
    <Typography
@@ -57,7 +65,7 @@ const Cart = () => {
      fontWeight: 400,
     }}
    >
-    Total : {calculateTotalPrice(itemsInCart)?.toFixed(2)}
+    Total : {calculateTotalPrice(itemsInCart) + "€"}
    </Typography>
   </StyledDrawer>
  );
