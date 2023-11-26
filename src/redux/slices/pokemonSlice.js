@@ -9,6 +9,7 @@ const initialState = {
  isLoaded: false,
  page: 1,
  searchQuery: "",
+ filters: [],
 };
 
 const pokemonSlice = createSlice({
@@ -30,6 +31,9 @@ const pokemonSlice = createSlice({
   setSearchquery: (state, action) => {
    state.searchQuery = action.payload;
   },
+  setFilters: (state, action) => {
+   state.filters = action.payload;
+  },
  },
 });
 
@@ -39,6 +43,7 @@ export const {
  setIsLoaded,
  incrementPage,
  setSearchquery,
+ setFilters,
 } = pokemonSlice.actions;
 
 export const selectPokemons = (state) =>
@@ -49,6 +54,7 @@ export const selectIsloaded = (state) =>
 export const selectPage = (state) => state.persistedReducer.pokemon.page;
 export const selectSearchquery = (state) =>
  state.persistedReducer.pokemon.searchQuery;
+export const selectFilters = (state) => state.persistedReducer.pokemon.filters;
 
 export default pokemonSlice.reducer;
 

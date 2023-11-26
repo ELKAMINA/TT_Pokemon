@@ -4,6 +4,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import ButtonBase from "@mui/material/ButtonBase";
+import { useAppDispatch } from "../redux/hooks/hooks";
+import { addItemToCart } from "../redux/slices/cartSlice";
 
 const Img = styled("img")({
  margin: "auto",
@@ -13,6 +15,10 @@ const Img = styled("img")({
 });
 
 const Card = ({ card }) => {
+ const dispatch = useAppDispatch();
+ const handleAddToCartClick = () => {
+  dispatch(addItemToCart(card));
+ };
  //  console.log("card", card.name);
  const content = (
   <Paper
@@ -43,9 +49,11 @@ const Card = ({ card }) => {
        </Typography>
       </Grid>
       <Grid item>
-       <Typography sx={{ cursor: "pointer" }} variant="body2">
-        Add to cart
-       </Typography>
+       <ButtonBase onClick={handleAddToCartClick}>
+        <Typography sx={{ cursor: "pointer" }} variant="body2">
+         Add to cart
+        </Typography>
+       </ButtonBase>
       </Grid>
      </Grid>
      <Grid item>

@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import { getAllCardsPage } from "../services/requests";
 import { useAppSelector } from "../redux/hooks/hooks";
-import { selectSearchquery } from "../redux/slices/pokemonSlice";
+import { selectSearchquery, selectFilters } from "../redux/slices/pokemonSlice";
+import { getResultWithFilters } from "../utils/resultWithFilters";
 
 const useCards = (page = 1) => {
  const [results, setResults] = useState([]);
@@ -11,6 +12,8 @@ const useCards = (page = 1) => {
  const [hasNextPage, setHasNextPage] = useState(false);
  const query = useAppSelector(selectSearchquery);
  const lastQuery = useRef("");
+ const filters = useAppSelector(selectFilters);
+ console.log("filters", filters);
 
  useEffect(() => {
   /* Resetting the states when re-fetching */
@@ -44,10 +47,10 @@ const useCards = (page = 1) => {
     //  console.log("isNewQuery:", isNewQuery);
     //  console.log("Fetched Data:", data);
     setResults((prev) => {
-     console.log("previous data ", prev);
      const updatedResults = isNewQuery ? data : [...prev, ...data];
+     const finalResults = getResultWithFilters(updatedResults, filters);
      //   console.log("Updated Results:", updatedResults);
-     return updatedResults;
+     return finalResults;
     });
     //  setResults((prev) => (isNewQuery ? data : (prev) => [...prev, ...data])); // Concatenating the previous results with the new ones
     setLoading(false);
@@ -61,7 +64,7 @@ const useCards = (page = 1) => {
 
   lastQuery.current = query;
   //   return () => abortController.abort(); // Cancel the request when the component is unmounting
- }, [page, query]);
+ }, [page, query, filters]);
 
  return { results, isLoading, isError, error, hasNextPage };
 };
