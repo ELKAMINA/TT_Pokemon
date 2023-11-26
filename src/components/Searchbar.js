@@ -22,7 +22,7 @@ const Searchbar = () => {
   <Box>
    <TextField
     id="outlined-basic"
-    label="Outlined"
+    label="Search your pokemon"
     variant="outlined"
     onChange={handleSearchInput}
     value={input}

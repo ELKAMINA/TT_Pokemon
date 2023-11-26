@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import { TextField } from "@mui/material";
 import ButtonBase from "@mui/material/ButtonBase";
-import { useAppDispatch } from "../redux/hooks/hooks";
-import { addItemToCart } from "../redux/slices/cartSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks/hooks";
+import {
+ addItemToCart,
+ selectCartItems,
+ deleteItemFromCart,
+} from "../redux/slices/cartSlice";
 
 const Img = styled("img")({
  margin: "auto",
@@ -16,9 +24,24 @@ const Img = styled("img")({
 
 const Card = ({ card }) => {
  const dispatch = useAppDispatch();
+ const allItemsInCart = useAppSelector(selectCartItems);
+ const totalUniqueItem = allItemsInCart.find(
+  (item) => item.id === card.id
+ )?.quantity;
+ console.log("totalItemsInCart", allItemsInCart);
+ console.log("totalItems", totalUniqueItem);
+ console.log("card id", card.id);
  const handleAddToCartClick = () => {
   dispatch(addItemToCart(card));
  };
+
+ const handleRemoveItem = () => {
+  console.log("je rentre ici ", card.name);
+  dispatch(deleteItemFromCart(card));
+ };
+
+ useEffect(() => {}, [totalUniqueItem]);
+
  //  console.log("card", card.name);
  const content = (
   <Paper
@@ -49,11 +72,36 @@ const Card = ({ card }) => {
        </Typography>
       </Grid>
       <Grid item>
-       <ButtonBase onClick={handleAddToCartClick}>
-        <Typography sx={{ cursor: "pointer" }} variant="body2">
-         Add to cart
-        </Typography>
-       </ButtonBase>
+       {!totalUniqueItem && (
+        <ButtonBase onClick={handleAddToCartClick}>
+         <Typography sx={{ cursor: "pointer" }} variant="body2">
+          Add to cart
+         </Typography>
+        </ButtonBase>
+       )}
+       {totalUniqueItem > 0 && (
+        <Box>
+         <RemoveCircleIcon
+          sx={{ cursor: "pointer" }}
+          onClick={handleRemoveItem}
+         />
+         <TextField
+          sx={{
+           width: "40%",
+           textAlign: "center",
+           cursor: "default",
+          }}
+          id="outlined-basic"
+          variant="outlined"
+          value={totalUniqueItem}
+          disabled
+         />
+         <AddCircleIcon
+          sx={{ cursor: "pointer" }}
+          onClick={handleAddToCartClick}
+         />
+        </Box>
+       )}
       </Grid>
      </Grid>
      <Grid item>
