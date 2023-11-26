@@ -9,8 +9,8 @@ import Tooltip from "@mui/material/Tooltip";
 import Badge from "@mui/material/Badge";
 import { styled } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useAppSelector } from "../../redux/hooks/hooks";
-import { selectTotalItems } from "../../redux/slices/cartSlice";
+import { useAppSelector, useAppDispatch } from "../../redux/hooks/hooks";
+import { selectTotalItems, setOpenCart } from "../../redux/slices/cartSlice";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
  "& .MuiBadge-badge": {
@@ -23,8 +23,10 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const Navbar = () => {
  const totalItems = useAppSelector(selectTotalItems);
+ const dispatch = useAppDispatch();
  const handleCartClick = (event) => {
-  console.log("OK ");
+  console.log("OK cliqué");
+  dispatch(setOpenCart(true));
  };
 
  React.useEffect(() => {}, [totalItems]);

@@ -4,6 +4,7 @@ const initialState = {
  cartItems: [],
  cartTotalQuantity: 0,
  cartTotalAmount: 0,
+ openCart: false,
 };
 
 const cartSlice = createSlice({
@@ -36,13 +37,18 @@ const cartSlice = createSlice({
     state.cartTotalAmount -= item.price;
    }
   },
+  setOpenCart: (state, action) => {
+   state.openCart = action.payload;
+  },
  },
 });
 
-export const { addItemToCart, deleteItemFromCart } = cartSlice.actions;
+export const { addItemToCart, deleteItemFromCart, setOpenCart } =
+ cartSlice.actions;
 
 export const selectTotalItems = (state) =>
  state.persistedReducer.cart.cartTotalQuantity;
 export const selectCartItems = (state) => state.persistedReducer.cart.cartItems;
+export const selectOpenCart = (state) => state.persistedReducer.cart.openCart;
 
 export default cartSlice.reducer;

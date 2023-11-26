@@ -22,7 +22,7 @@ const Listcards = () => {
  };
 
  if (isError) return <Typography>{error.message}</Typography>;
- console.log("results", results);
+//  console.log("results", results);
  return (
   <Container
    sx={{

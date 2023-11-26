@@ -4,6 +4,7 @@ import Listcards from "../components/Listcards";
 import Searchbar from "../components/Searchbar";
 import Filters from "../components/Filters";
 import Navbar from "../components/common/Navbar";
+import Cart from "../components/common/Cart";
 
 const Main = () => {
  return (
@@ -13,6 +14,7 @@ const Main = () => {
     <Searchbar />
     <Filters />
     <Listcards />
+    <Cart />
    </Container>
   </>
  );

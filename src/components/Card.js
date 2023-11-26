@@ -28,9 +28,9 @@ const Card = ({ card }) => {
  const totalUniqueItem = allItemsInCart.find(
   (item) => item.id === card.id
  )?.quantity;
- console.log("totalItemsInCart", allItemsInCart);
- console.log("totalItems", totalUniqueItem);
- console.log("card id", card.id);
+ //  console.log("totalItemsInCart", allItemsInCart);
+ //  console.log("totalItems", totalUniqueItem);
+ //  console.log("card id", card.id);
  const handleAddToCartClick = () => {
   dispatch(addItemToCart(card));
  };
