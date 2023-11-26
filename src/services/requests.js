@@ -15,7 +15,7 @@ const call = async (page, pageSize, searchQuery, options = {}) => {
 export const getAllCardsPage = async (page, pageSize, query, options = {}) => {
  try {
   const response = await call(page, pageSize, query, options);
-  console.log("response", response);
+  //   console.log("response", response);
   return response.data.data;
  } catch (error) {
   console.error(error);

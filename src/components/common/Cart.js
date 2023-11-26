@@ -19,6 +19,11 @@ const Cart = () => {
  const dispatch = useAppDispatch();
  const openCart = useAppSelector(selectOpenCart);
  const itemsInCart = useAppSelector(selectCartItems);
+ const calculateTotalPrice = (itemsInCart) => {
+  itemsInCart.reduce((acc, item) => {
+   return acc + item.price * item.quantity;
+  }, 0);
+ };
  const handleCloseCart = () => {
   dispatch(setOpenCart(false));
  };
@@ -44,6 +49,16 @@ const Cart = () => {
    {itemsInCart.length === 0 && (
     <Typography variant="h3">Your cart is empty</Typography>
    )}
+   <Typography
+    variant="h1"
+    sx={{
+     margin: "20px 0px 50px 20px",
+     fontSize: "50px",
+     fontWeight: 400,
+    }}
+   >
+    Total : {calculateTotalPrice(itemsInCart)?.toFixed(2)}
+   </Typography>
   </StyledDrawer>
  );
 };

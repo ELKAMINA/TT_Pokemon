@@ -14,6 +14,7 @@ import {
  selectCartItems,
  deleteItemFromCart,
 } from "../redux/slices/cartSlice";
+import { pricing } from "../utils/pricing";
 
 const Img = styled("img")({
  margin: "auto",
@@ -36,13 +37,13 @@ const Card = ({ card }) => {
  };
 
  const handleRemoveItem = () => {
-  console.log("je rentre ici ", card.name);
+  // console.log("je rentre ici ", card.name);
   dispatch(deleteItemFromCart(card));
  };
 
  useEffect(() => {}, [totalUniqueItem]);
 
- //  console.log("card", card.name);
+ console.log("card", card);
  const content = (
   <Paper
    sx={{
@@ -105,8 +106,16 @@ const Card = ({ card }) => {
       </Grid>
      </Grid>
      <Grid item>
-      <Typography variant="subtitle1" component="div">
-       $19.00
+      <Typography
+       variant="subtitle1"
+       component="div"
+       sx={{
+        marginLeft: "10px",
+       }}
+      >
+       {card.cardmarket?.prices?.averageSellPrice
+        ? pricing(card.cardmarket?.prices?.averageSellPrice).toFixed(2) + " €"
+        : 1 + " €"}
       </Typography>
      </Grid>
     </Grid>
