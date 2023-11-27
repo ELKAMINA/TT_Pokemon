@@ -1,22 +1,23 @@
 import { pricing } from "./pricing";
+import { uniqueArray } from "./duplicateCheck";
 
 export const getResultWithFilters = (results, filters) => {
- //  console.log("getResultWithFilters", filters);
+ console.log("getResultWithFilters", filters);
  if (filters?.length === 0) return results;
  filters?.forEach((element) => {
   switch (element) {
    case "":
     break;
    case "Holo rare":
-    results = results.filter((result) => result.rarity === "Rare Holo");
+    results = results.filter((result) => result.rarity?.includes("Rare Holo"));
     break;
    case "Descending prices":
     results = results.sort((a, b) => {
      const aPrice = a.cardmarket?.prices?.averageSellPrice
-      ? pricing(a.cardmarket?.prices?.averageSellPrice).toFixed(3)
+      ? pricing(a.cardmarket?.prices?.averageSellPrice).toFixed(1)
       : 1;
      const bPrice = b.cardmarket?.prices?.averageSellPrice
-      ? pricing(b.cardmarket?.prices?.averageSellPrice).toFixed(3)
+      ? pricing(b.cardmarket?.prices?.averageSellPrice).toFixed(1)
       : 1;
      return bPrice - aPrice;
     });
@@ -24,10 +25,10 @@ export const getResultWithFilters = (results, filters) => {
    case "Ascending prices":
     results = results.sort((a, b) => {
      const aPrice = a.cardmarket?.prices?.averageSellPrice
-      ? pricing(a.cardmarket?.prices?.averageSellPrice).toFixed(3)
+      ? pricing(a.cardmarket?.prices?.averageSellPrice).toFixed(1)
       : 1;
      const bPrice = b.cardmarket?.prices?.averageSellPrice
-      ? pricing(b.cardmarket?.prices?.averageSellPrice).toFixed(3)
+      ? pricing(b.cardmarket?.prices?.averageSellPrice).toFixed(1)
       : 1;
      return aPrice - bPrice;
     });
@@ -36,5 +37,6 @@ export const getResultWithFilters = (results, filters) => {
     break;
   }
  });
- return results;
+ let resultWithoutDuplicates = uniqueArray(results);
+ return resultWithoutDuplicates;
 };

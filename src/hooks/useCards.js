@@ -62,8 +62,7 @@ const useCards = () => {
      const updatedResults = isNewQuery ? data : [...prev, ...data];
      const finalResults = getResultWithFilters(updatedResults, filters);
      //  console.log(`for page : ${page} && query : ${query}`);
-     console.log("Final result :", finalResults);
-
+     console.log("Final result :", finalResults.length);
      //   console.log("Updated Results:", updatedResults);
      return finalResults;
     });
@@ -72,6 +71,10 @@ const useCards = () => {
     setLoading(false);
    })
    .catch((error) => {
+    if (error.name === "AbortError") {
+     // Handle abort, usually by doing nothing or logging
+     console.log("Fetch aborted");
+    }
     setIsError(true);
     if (signal.aborted) return; // If the request is aborted, don't update the state bc error created on purpose
     setError(error);
@@ -85,7 +88,7 @@ const useCards = () => {
   return () => {
    // Check if it's a component unmount or a query change
    //    if (!isUnmounting.current) {
-   //     abortController.abort(); // Only abort if it's not a component unmount
+   abortController.abort(); // Only abort if it's not a component unmount
    //    }
   };
  }, [page, query, filters]);
