@@ -31,14 +31,17 @@ const useCards = () => {
   const abortController = new AbortController();
   const signal = abortController.signal;
   /* ***** */
-
+  console.log("lastqury", lastQuery.current);
+  console.log("query", query);
+  console.log("filters.length ", filters.length);
+  console.log("lastFilters.current ", lastFilter.current.length);
   const isNewQuery = query !== lastQuery.current;
   const isNewFilter = filters.length !== lastFilter.current.length;
   if (isNewQuery || isNewFilter || (isNewQuery && isNewFilter)) {
-   console.log("lastqury", lastQuery.current);
-   console.log("query", query);
-   console.log("filters.length ", filters.length);
-   console.log("lastFilters.current ", lastFilter.current.length);
+   //    console.log("lastqury", lastQuery.current);
+   //    console.log("query", query);
+   //    console.log("filters.length ", filters.length);
+   //    console.log("lastFilters.current ", lastFilter.current.length);
    //    console.log("newQuery ", isNewQuery);
    setResults([]);
   }
@@ -69,6 +72,7 @@ const useCards = () => {
    });
 
   lastQuery.current = query;
+  lastFilter.current = filters;
 
   //   return () => {
   // Check if it's a component unmount or a query change
