@@ -7,6 +7,7 @@ import Navbar from "../components/common/Navbar";
 import Cart from "../components/common/Cart";
 
 const Main = () => {
+
  return (
   <>
    <Navbar />

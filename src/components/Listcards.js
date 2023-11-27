@@ -4,38 +4,43 @@ import { CircularProgress, Box, Container, Typography } from "@mui/material";
 import Card from "./Card";
 import useCards from "../hooks/useCards";
 import { useAppDispatch, useAppSelector } from "../redux/hooks/hooks";
-import {
- incrementPage,
- selectSearchquery,
- selectPage,
- resetPage,
-} from "../redux/slices/pokemonSlice";
+import { incrementPage, selectSearchquery } from "../redux/slices/pokemonSlice";
 import { useTranslation } from "react-i18next";
+import Link from "@mui/material/Link";
 
 const Listcards = () => {
  const { t } = useTranslation();
  const dispatch = useAppDispatch();
- const page = useAppSelector(selectPage);
  const query = useAppSelector(selectSearchquery);
 
- //  const query = useAppSelector(selectSearchquery);
+ const scrollableDivRef = useRef(null);
+
+ useEffect(() => {
+  // Reset scroll position when a new search is performed
+  scrollableDivRef.current.scrollTop = 0;
+ }, [query]);
 
  const { results, isLoading, isError, error, hasNextPage } = useCards();
 
  const fetchMoreCards = () => {
-  if (hasNextPage) {
-   console.log("More pages");
+  if (hasNextPage && !isLoading) {
    dispatch(incrementPage());
+  }
+ };
+
+ const scrollToTop = () => {
+  if (scrollableDivRef.current) {
+   scrollableDivRef.current.scrollTop = 0;
   }
  };
 
  if (isError) return <Typography>{error.message}</Typography>;
 
- console.log("FROM LIST CARDS -- page", page);
  return (
   <Container
+   ref={scrollableDivRef}
    sx={{
-    maxHeight: "800px", // Adjust this height as needed
+    maxHeight: "800px",
     overflow: "auto",
     backgroundColor: "yellow",
     padding: "16px",
@@ -68,7 +73,15 @@ const Listcards = () => {
     </InfiniteScroll>
     <Typography>
      {" "}
-     <a href="#top"> {t("listcard.goTop")}</a>
+     {/* <a href="#top"> {t("listcard.goTop")}</a> */}
+     <Link
+      onClick={scrollToTop}
+      style={{ cursor: "pointer" }}
+      component="button"
+      variant="body2"
+     >
+      {t("listcard.goTop")}
+     </Link>
     </Typography>
    </Box>
   </Container>

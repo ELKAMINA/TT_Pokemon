@@ -14,7 +14,7 @@ const call = async (page, pageSize, searchQuery, options = {}) => {
 // Get all pokemon cards
 export const getAllCardsPage = async (page, pageSize, query, options = {}) => {
  try {
-  console.log("test");
+  //   console.log("test");
   const response = await call(page, pageSize, query, options);
   //   console.log("response", response);
   return response.data.data;
