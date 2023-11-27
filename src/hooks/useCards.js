@@ -22,14 +22,13 @@ const useCards = () => {
  const filters = useAppSelector(selectFilters);
 
  useEffect(() => {
+  const abortController = new AbortController();
+  const signal = abortController.signal;
   console.log("USECARD filter = ", filters);
   setLoading(true);
   setIsError(false);
   setError({});
 
-  /* Cancel the request when the component is unmounting */
-  const abortController = new AbortController();
-  const signal = abortController.signal;
   /* ***** */
   console.log("lastqury", lastQuery.current);
   console.log("query", query);
@@ -38,6 +37,7 @@ const useCards = () => {
   const isNewQuery = query !== lastQuery.current;
   const isNewFilter = filters.length !== lastFilter.current.length;
   if (isNewQuery || isNewFilter || (isNewQuery && isNewFilter)) {
+   //   abortController.abort();
    //    console.log("lastqury", lastQuery.current);
    //    console.log("query", query);
    //    console.log("filters.length ", filters.length);
@@ -62,9 +62,6 @@ const useCards = () => {
     setLoading(false);
    })
    .catch((error) => {
-    if (error.name === "AbortError") {
-     console.log("Fetch aborted");
-    }
     setIsError(true);
     if (signal.aborted) return; // If the request is aborted, don't update the state bc error created on purpose
     setError(error);
@@ -74,11 +71,12 @@ const useCards = () => {
   lastQuery.current = query;
   lastFilter.current = filters;
 
-  //   return () => {
-  // Check if it's a component unmount or a query change
-  //    if (!isUnmounting.current) {
-  //    abortController.abort(); // Only abort if it's not a component unmount
-  //    }
+  return () => {
+   // Check if it's a component unmount or a query change
+   //    if (!isUnmounting.current) {
+   //     // Only abort if it's not a component unmount
+   abortController.abort();
+  };
   //   };
  }, [page, query, filters.length, filters]);
 

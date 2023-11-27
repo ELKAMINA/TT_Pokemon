@@ -19,7 +19,6 @@ const call = async (page, pageSize, searchQuery, filters, options = {}) => {
  } else if (searchQuery && filters.length > 0) {
   searchQuery = searchQuery.toLowerCase();
   if (filters.includes("Holo rare")) {
-
    return await api.get(
     `/cards?page=${page}&pageSize=${pageSize}&q=name:*${searchQuery}* rarity:*Holo*`,
     options
@@ -42,6 +41,8 @@ export const getAllCardsPage = async (
   //   console.log("response", response);
   return response.data.data;
  } catch (error) {
-  console.error(error);
+  if (error.name === "AbortError") {
+   console.log("Fetch aborted");
+  }
  }
 };

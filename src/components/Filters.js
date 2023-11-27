@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import React from "react";
+import React, { useEffect } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import { useAppDispatch } from "../redux/hooks/hooks";
 import { setFilters } from "../redux/slices/pokemonSlice";
@@ -57,6 +57,9 @@ const Filters = () => {
       margin: "2%",
       borderRadius: "15px",
      }}
+     disabled={
+      toggled.length && toggled.includes("Ascending prices") ? true : false
+     }
     >
      {t("filters.descendingPrices")}
     </ToggleButton>
@@ -67,8 +70,11 @@ const Filters = () => {
       margin: "2%",
       borderRadius: "15px",
      }}
+     disabled={
+      toggled.length && toggled.includes("Descending prices") ? true : false
+     }
     >
-     {t("filters.descendingPrices")}
+     {t("filters.ascendingPrices")}
     </ToggleButton>
    </ToggleButtonGroup>
   </Stack>
