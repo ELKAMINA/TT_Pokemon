@@ -12,6 +12,11 @@ const Filters = () => {
  const dispatch = useAppDispatch();
 
  const handleToggles = (event, isToggled) => {
+  console.log("isToggled", isToggled);
+  if (!isToggled.length) {
+   setToggled([]);
+   dispatch(setFilters([]));
+  }
   if (isToggled.length) {
    const array = isToggled.filter((item) => item !== "");
    setToggled(array);
