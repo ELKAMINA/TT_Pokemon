@@ -3,15 +3,19 @@ import Box from "@mui/material/Box";
 import debounce from "lodash.debounce";
 import SearchIcon from "@mui/icons-material/Search";
 import TextField from "@mui/material/TextField";
-import { useAppDispatch } from "../redux/hooks/hooks";
-import { setSearchquery } from "../redux/slices/pokemonSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks/hooks";
+import {
+ resetPage,
+ selectSearchquery,
+ setSearchquery,
+} from "../redux/slices/pokemonSlice";
 import { useTranslation } from "react-i18next";
 
 const Searchbar = () => {
- const { t, i18n } = useTranslation();
+ const { t} = useTranslation();
  const [input, setInput] = useState("");
  const dispatch = useAppDispatch();
-
+ const query = useAppSelector(selectSearchquery);
 
  const handleSearchInput = (event) => {
   /* if nothing has been typed, display all the cards */
@@ -20,6 +24,9 @@ const Searchbar = () => {
 
  const handleSearchSubmit = () => {
   dispatch(setSearchquery(input));
+  if (input !== query) {
+   dispatch(resetPage());
+  }
  };
 
  return (

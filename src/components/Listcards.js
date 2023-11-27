@@ -1,39 +1,37 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {
- CircularProgress,
- Box,
- Container,
- Typography,
- IconButton,
-} from "@mui/material";
+import { CircularProgress, Box, Container, Typography } from "@mui/material";
 import Card from "./Card";
 import useCards from "../hooks/useCards";
-import { useAppSelector } from "../redux/hooks/hooks";
-import { selectSearchquery } from "../redux/slices/pokemonSlice";
-import Pokemon from "./Pokemoninfo";
+import { useAppDispatch, useAppSelector } from "../redux/hooks/hooks";
+import {
+ incrementPage,
+ selectSearchquery,
+ selectPage,
+ resetPage,
+} from "../redux/slices/pokemonSlice";
 import { useTranslation } from "react-i18next";
 
 const Listcards = () => {
  const { t } = useTranslation();
- const [page, setPage] = useState(1);
-
+ const dispatch = useAppDispatch();
+ const page = useAppSelector(selectPage);
  const query = useAppSelector(selectSearchquery);
- console.log("query", query);
- const { results, isLoading, isError, error, hasNextPage } = useCards(page);
 
- useEffect(() => {
-  setPage(1);
- }, [query]);
+ //  const query = useAppSelector(selectSearchquery);
+
+ const { results, isLoading, isError, error, hasNextPage } = useCards();
 
  const fetchMoreCards = () => {
   if (hasNextPage) {
-   setPage((prev) => prev + 1);
+   console.log("More pages");
+   dispatch(incrementPage());
   }
  };
 
  if (isError) return <Typography>{error.message}</Typography>;
- //  console.log("results", results);
+
+ console.log("FROM LIST CARDS -- page", page);
  return (
   <Container
    sx={{
@@ -44,18 +42,11 @@ const Listcards = () => {
    }}
    id="scrollableDiv"
   >
-   <Box
-    sx={
-     {
-      //  backgroundColor: "red",
-      //  maxHeight: "90%",
-     }
-    }
-   >
+   <Box>
     <InfiniteScroll
      dataLength={results?.length} // to let InfiniteScroll know how many items are already rendered
      next={fetchMoreCards} // fetches next data. Contains previous and next data
-     hasMore={true}
+     hasMore={hasNextPage}
      loader={
       isLoading && (
        <>

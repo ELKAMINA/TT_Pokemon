@@ -28,6 +28,9 @@ const pokemonSlice = createSlice({
   incrementPage: (state) => {
    state.page += 1;
   },
+  resetPage: (state) => {
+   state.page = 1;
+  },
   setSearchquery: (state, action) => {
    state.searchQuery = action.payload;
   },
@@ -44,6 +47,7 @@ export const {
  incrementPage,
  setSearchquery,
  setFilters,
+ resetPage,
 } = pokemonSlice.actions;
 
 export const selectPokemons = (state) =>
@@ -57,17 +61,3 @@ export const selectSearchquery = (state) =>
 export const selectFilters = (state) => state.persistedReducer.pokemon.filters;
 
 export default pokemonSlice.reducer;
-
-export function fetchAllPokemons() {
- return async (dispatch, getState) => {
-  try {
-   const response = await api.get(`${BASE_URL}/cards`);
-   const data = response.data.data;
-   dispatch(setLoading(false));
-   dispatch(setIsLoaded(true));
-   dispatch(addPokemons(data));
-  } catch (error) {
-   console.error(error.data);
-  }
- };
-}

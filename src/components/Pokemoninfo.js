@@ -35,7 +35,7 @@ export default function Pokemon({ open, setOpen, card }) {
  };
 
  React.useEffect(() => {
-//   console.log("card retravaillée", pokInfo);
+  //   console.log("card retravaillée", pokInfo);
  }, [card.id]);
 
  return (
@@ -61,7 +61,7 @@ export default function Pokemon({ open, setOpen, card }) {
     >
      <img src={pokInfo.svgImage} alt="pokemon" />
      <Typography>{pokInfo.hp}</Typography>
-     <Typography>{pokInfo.title}</Typography>
+     <Typography>{pokInfo?.title ? pokInfo.title : ""}</Typography>
      <Typography>{pokInfo.subtitle}</Typography>
     </DialogTitle>
     <Divider />
@@ -77,11 +77,15 @@ export default function Pokemon({ open, setOpen, card }) {
       style={{ maxWidth: "700px" }}
      />
      <DialogContentText>
-      <Typography variant="h6">{pokInfo.attacks.title}</Typography>
       <Typography variant="h6">
-       {pokInfo.attacks.attacks.map(
-        (el) => el.name + " \n" + el.damage + " \n" + el.text
-       )}
+       {pokInfo.attacks?.title ? pokInfo.attacks.title : ""}
+      </Typography>
+      <Typography variant="h6">
+       {pokInfo.attacks && pokInfo.attacks.attacks
+        ? pokInfo.attacks.attacks.map(
+           (el) => el.name + " \n" + el.damage + " \n" + el.text
+          )
+        : "N/A"}
       </Typography>
      </DialogContentText>
      <DialogContentText>
