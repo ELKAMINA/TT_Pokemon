@@ -15,6 +15,7 @@ import {
  deleteItemFromCart,
 } from "../redux/slices/cartSlice";
 import { pricing } from "../utils/pricing";
+import Pokemon from "./Pokemoninfo";
 
 const Img = styled("img")({
  margin: "auto",
@@ -25,6 +26,7 @@ const Img = styled("img")({
 
 const Card = ({ card }) => {
  const dispatch = useAppDispatch();
+ const [open, setOpen] = React.useState(false);
  const allItemsInCart = useAppSelector(selectCartItems);
  const totalUniqueItem = allItemsInCart.find(
   (item) => item.id === card.id
@@ -39,6 +41,10 @@ const Card = ({ card }) => {
  const handleRemoveItem = () => {
   // console.log("je rentre ici ", card.name);
   dispatch(deleteItemFromCart(card));
+ };
+
+ const handlePokClick = () => {
+  setOpen(true);
  };
 
  useEffect(() => {}, [totalUniqueItem]);
@@ -57,7 +63,7 @@ const Card = ({ card }) => {
   >
    <Grid container spacing={2}>
     <Grid item>
-     <ButtonBase sx={{ width: 128, height: 128 }}>
+     <ButtonBase sx={{ width: 128, height: 128 }} onClick={handlePokClick}>
       <Img alt="complex" src={card.images?.large} />
      </ButtonBase>
     </Grid>
@@ -120,6 +126,7 @@ const Card = ({ card }) => {
      </Grid>
     </Grid>
    </Grid>
+   <Pokemon open={open} setOpen={setOpen} card={card} />
   </Paper>
  );
 

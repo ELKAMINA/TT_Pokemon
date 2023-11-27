@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { CircularProgress, Box, Container, Typography } from "@mui/material";
+import {
+ CircularProgress,
+ Box,
+ Container,
+ Typography,
+ IconButton,
+} from "@mui/material";
 import Card from "./Card";
 import useCards from "../hooks/useCards";
 import { useAppSelector } from "../redux/hooks/hooks";
 import { selectSearchquery } from "../redux/slices/pokemonSlice";
+import Pokemon from "./Pokemoninfo";
 
 const Listcards = () => {
  const [page, setPage] = useState(1);
+
  const query = useAppSelector(selectSearchquery);
  const { results, isLoading, isError, error, hasNextPage } = useCards(page);
 
@@ -22,7 +30,7 @@ const Listcards = () => {
  };
 
  if (isError) return <Typography>{error.message}</Typography>;
-//  console.log("results", results);
+ //  console.log("results", results);
  return (
   <Container
    sx={{
@@ -58,7 +66,7 @@ const Listcards = () => {
     >
      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
       {results?.map((pokemon, index) => (
-       <Box sx={{ m: 1 }} key={index}>
+       <Box key={index} sx={{ m: 3 }}>
         <Card card={pokemon}></Card>
        </Box>
       ))}
