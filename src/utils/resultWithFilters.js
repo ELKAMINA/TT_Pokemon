@@ -2,14 +2,11 @@ import { pricing } from "./pricing";
 import { uniqueArray } from "./duplicateCheck";
 
 export const getResultWithFilters = (results, filters) => {
- console.log("getResultWithFilters", filters);
+ //  console.log("getResultWithFilters", filters);
  if (filters?.length === 0) return results;
  filters?.forEach((element) => {
   switch (element) {
    case "":
-    break;
-   case "Holo rare":
-    results = results.filter((result) => result.rarity?.includes("Rare Holo"));
     break;
    case "Descending prices":
     results = results.sort((a, b) => {
@@ -37,6 +34,7 @@ export const getResultWithFilters = (results, filters) => {
     break;
   }
  });
- let resultWithoutDuplicates = uniqueArray(results);
- return resultWithoutDuplicates;
+ //  let resultWithoutDuplicates = uniqueArray(results);
+//  console.log("result avant doublons", resultWithoutDuplicates);
+ return results;
 };

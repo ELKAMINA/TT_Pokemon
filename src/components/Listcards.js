@@ -73,7 +73,6 @@ const Listcards = () => {
     </InfiniteScroll>
     <Typography>
      {" "}
-     {/* <a href="#top"> {t("listcard.goTop")}</a> */}
      <Link
       onClick={scrollToTop}
       style={{ cursor: "pointer" }}

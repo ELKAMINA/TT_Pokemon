@@ -13,8 +13,9 @@ const Filters = () => {
 
  const handleToggles = (event, isToggled) => {
   if (isToggled.length) {
-   setToggled(isToggled);
-   dispatch(setFilters(isToggled));
+   const array = isToggled.filter((item) => item !== "");
+   setToggled(array);
+   dispatch(setFilters(array));
   }
  };
  return (
@@ -62,7 +63,7 @@ const Filters = () => {
       borderRadius: "15px",
      }}
     >
-    {t("filters.descendingPrices")}
+     {t("filters.descendingPrices")}
     </ToggleButton>
    </ToggleButtonGroup>
   </Stack>
