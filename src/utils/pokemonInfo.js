@@ -36,17 +36,23 @@ const pokemonInfo = (card) => {
   cardmarket,
  } = card;
 
- console.log("hp ", hp);
- console.log("name ", name);
- console.log("nationalPokedexNumber ", nationalPokedexNumbers);
- console.log("types  ", types);
- console.log("subtype ", subtypes);
- console.log("supertype ", supertype);
- console.log("ability ", abilities);
- console.log("weaknesses ", weaknesses);
+ //  console.log("hp ", hp);
+ //  console.log("name ", name);
+ //  console.log("nationalPokedexNumber ", nationalPokedexNumbers);
+ //  console.log("types  ", types);
+ //  console.log("subtype ", subtypes);
+ //  console.log("supertype ", supertype);
+ //  console.log("ability ", abilities);
+ //  console.log("weaknesses ", weaknesses);
  let newCard = {
-  svgImage: `https://veekun.com/dex/media/pokemon/dream-world/${nationalPokedexNumbers[0]}.svg`,
-  title: `${name} #${nationalPokedexNumbers[0]}`,
+  svgImage:
+   nationalPokedexNumbers?.length > 0
+    ? `https://veekun.com/dex/media/pokemon/dream-world/${nationalPokedexNumbers[0]}.svg`
+    : "",
+  title:
+   nationalPokedexNumbers?.length > 0
+    ? `${name} #${nationalPokedexNumbers[0]}`
+    : `${name}`,
   hp: `HP ${hp}` || "Unknown",
   subtitle: `${supertype} - ${subtypes}`,
   image: images.large,
@@ -55,11 +61,11 @@ const pokemonInfo = (card) => {
   // rules: fnRules(rules),
   attacks: fnAttacks(attacks),
   // miscellaneous: fnMiscellaneous({
-   weaknesses,
+  weaknesses,
   //  //  resistances,
   //  retreatCost,
-   artist,
-   rarity,
+  artist,
+  rarity,
   //  set,
   // }),
  };

@@ -13,7 +13,6 @@ const useCards = (page = 1) => {
  const query = useAppSelector(selectSearchquery);
  const lastQuery = useRef("");
  const filters = useAppSelector(selectFilters);
- console.log("filters", filters);
 
  useEffect(() => {
   /* Resetting the states when re-fetching */

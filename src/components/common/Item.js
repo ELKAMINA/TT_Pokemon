@@ -11,8 +11,11 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { TextField } from "@mui/material";
 import "../../styles/items.styles.css";
 import { pricing } from "../../utils/pricing";
+import { useTranslation } from "react-i18next";
 
 function Item({ card }) {
+ const { t, i18n } = useTranslation();
+
  const allItemsInCart = useAppSelector(selectCartItems);
  const totalUniqueItem = allItemsInCart.find(
   (item) => item.id === card.id
@@ -56,9 +59,9 @@ function Item({ card }) {
       marginTop: "20px",
      }}
     >
-     <Typography variant="p"> Unit price: {cardPrice + "€"}</Typography>
+     <Typography variant="p"> {t("cart.unitPrice")}: {cardPrice + "€"}</Typography>
      <Typography variant="p">
-      Total price: {(totalUniqueItem * cardPrice).toFixed(2) + "€"}
+     {t("cart.totalPrice")}: {(totalUniqueItem * cardPrice).toFixed(2) + "€"}
      </Typography>
     </Box>
 

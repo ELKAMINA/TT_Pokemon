@@ -12,11 +12,14 @@ import useCards from "../hooks/useCards";
 import { useAppSelector } from "../redux/hooks/hooks";
 import { selectSearchquery } from "../redux/slices/pokemonSlice";
 import Pokemon from "./Pokemoninfo";
+import { useTranslation } from "react-i18next";
 
 const Listcards = () => {
+ const { t } = useTranslation();
  const [page, setPage] = useState(1);
 
  const query = useAppSelector(selectSearchquery);
+ console.log("query", query);
  const { results, isLoading, isError, error, hasNextPage } = useCards(page);
 
  useEffect(() => {
@@ -50,18 +53,18 @@ const Listcards = () => {
     }
    >
     <InfiniteScroll
-     dataLength={results.length} // to let InfiniteScroll know how many items are already rendered
+     dataLength={results?.length} // to let InfiniteScroll know how many items are already rendered
      next={fetchMoreCards} // fetches next data. Contains previous and next data
      hasMore={true}
      loader={
       isLoading && (
        <>
-        <Typography> More data is loading ... </Typography>
+        <Typography> {t("listcard.loadingData")} </Typography>
         <CircularProgress />
        </>
       )
      }
-     endMessage={<Typography> You've seen all card available ... </Typography>}
+     endMessage={<Typography> {t("listcard.loadingEnd")} </Typography>}
      scrollableTarget="scrollableDiv"
     >
      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
@@ -74,7 +77,7 @@ const Listcards = () => {
     </InfiniteScroll>
     <Typography>
      {" "}
-     <a href="#top"> Back to top</a>
+     <a href="#top"> {t("listcard.goTop")}</a>
     </Typography>
    </Box>
   </Container>

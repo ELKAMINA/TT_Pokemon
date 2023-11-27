@@ -9,6 +9,7 @@ import {
 import Item from "./Item";
 import Divider from "@mui/material/Divider";
 import { pricing } from "../../utils/pricing";
+import { useTranslation } from "react-i18next";
 
 const StyledDrawer = styled(Drawer)(({ theme }) => ({
  ".MuiDrawer-paper": {
@@ -17,6 +18,7 @@ const StyledDrawer = styled(Drawer)(({ theme }) => ({
 }));
 
 const Cart = () => {
+ const { t, i18n } = useTranslation();
  const dispatch = useAppDispatch();
  const openCart = useAppSelector(selectOpenCart);
  const itemsInCart = useAppSelector(selectCartItems);
@@ -25,8 +27,8 @@ const Cart = () => {
    const itemPrice = item.cardmarket?.prices?.averageSellPrice
     ? pricing(item.cardmarket?.prices?.averageSellPrice).toFixed(3)
     : 1;
-   console.log("itemPrice", itemPrice);
-   console.log("itemQuantity", item.quantity);
+   //    console.log("itemPrice", itemPrice);
+   //    console.log("itemQuantity", item.quantity);
    return acc + itemPrice * item.quantity;
   }, 0);
  };
@@ -34,7 +36,7 @@ const Cart = () => {
   dispatch(setOpenCart(false));
  };
 
- console.log("itemsInCart", itemsInCart);
+ //  console.log("itemsInCart", itemsInCart);
  return (
   <StyledDrawer anchor="right" open={openCart} onClose={handleCloseCart}>
    <Typography
@@ -43,7 +45,7 @@ const Cart = () => {
      margin: "20px 0px 50px 20px",
     }}
    >
-    Your cart
+    {t("cart.title")}
    </Typography>
    {itemsInCart.length > 0 &&
     itemsInCart.map((item, index) => {
@@ -55,7 +57,7 @@ const Cart = () => {
      );
     })}
    {itemsInCart.length === 0 && (
-    <Typography variant="h3">Your cart is empty</Typography>
+    <Typography variant="h3">{t("cart.empty")}</Typography>
    )}
    <Typography
     variant="h1"

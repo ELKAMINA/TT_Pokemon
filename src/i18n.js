@@ -11,7 +11,7 @@ i18n
  // init i18next
  // for all options read: https://www.i18next.com/overview/configuration-options
  .init({
-  debug: true,
+  //   debug: true,
   fallbackLng: "en",
   interpolation: {
    escapeValue: false, // not needed for react as it escapes by default
@@ -19,7 +19,52 @@ i18n
   resources: {
    en: {
     translation: {
-     // here we will place our translations...
+     searchbar: {
+      label: "Search a pokemon...",
+     },
+     listcard: {
+      loadingData: "More data is loading...",
+      loadingEnd: "That's all folks!",
+      goTop: "Go to top",
+     },
+     filters: {
+      descendingPrices: "Descending prices",
+      ascendingPrices: "Ascending prices",
+     },
+     card: {
+      addCart: "Add to cart",
+     },
+     cart: {
+      title: "Your cart",
+      empty: "Your cart is empty",
+      unitPrice: "Unit price",
+      totalPrice: "Total price",
+     },
+    },
+   },
+   fr: {
+    translation: {
+     searchbar: {
+      label: "Trouve ton pokemon...",
+     },
+     listcard: {
+      loadingData: "La suite arrive...",
+      loadingEnd: "C'est la fin!",
+      goTop: "Retour en haut",
+     },
+     filters: {
+      descendingPrices: "Prix descendants",
+      ascendingPrices: "Prix ascendants",
+     },
+     card: {
+      addCart: "Ajouter au panier",
+     },
+     cart: {
+      title: "Votre panier",
+      empty: "Votre panier est vide",
+      unitPrice: "Prix unitaire",
+      totalPrice: "Prix total",
+     },
     },
    },
   },

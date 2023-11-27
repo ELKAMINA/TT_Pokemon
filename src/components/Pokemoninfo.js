@@ -35,7 +35,7 @@ export default function Pokemon({ open, setOpen, card }) {
  };
 
  React.useEffect(() => {
-  console.log("card retravaillée", pokInfo);
+//   console.log("card retravaillée", pokInfo);
  }, [card.id]);
 
  return (

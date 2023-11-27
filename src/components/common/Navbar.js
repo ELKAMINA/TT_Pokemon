@@ -7,10 +7,12 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Tooltip from "@mui/material/Tooltip";
 import Badge from "@mui/material/Badge";
+import { Avatar } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks/hooks";
 import { selectTotalItems, setOpenCart } from "../../redux/slices/cartSlice";
+import { useTranslation } from "react-i18next";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
  "& .MuiBadge-badge": {
@@ -23,13 +25,18 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 
 const Navbar = () => {
  const totalItems = useAppSelector(selectTotalItems);
+ const { t, i18n } = useTranslation();
+
  const dispatch = useAppDispatch();
  const handleCartClick = (event) => {
-  console.log("OK cliqué");
+//   console.log("OK cliqué");
   dispatch(setOpenCart(true));
  };
 
  React.useEffect(() => {}, [totalItems]);
+ const changeLanguage = (language) => {
+  i18n.changeLanguage(language);
+ };
 
  return (
   <AppBar
@@ -72,6 +79,16 @@ const Navbar = () => {
         </StyledBadge>
        </IconButton>
       </Tooltip>
+     </Box>
+     <Box>
+      <Avatar
+       src="https://p7.hiclipart.com/preview/14/79/689/flag-of-france-flag-of-italy-national-flag-france.jpg"
+       onClick={() => changeLanguage("fr")}
+      />
+      <Avatar
+       src="https://w7.pngwing.com/pngs/64/514/png-transparent-flag-of-great-britain-flag-of-the-united-kingdom-english-flag-miscellaneous-angle-english.png"
+       onClick={() => changeLanguage("en")}
+      />
      </Box>
     </Toolbar>
    </Container>

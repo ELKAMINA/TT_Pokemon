@@ -4,9 +4,11 @@ import React from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import { useAppDispatch } from "../redux/hooks/hooks";
 import { setFilters } from "../redux/slices/pokemonSlice";
+import { useTranslation } from "react-i18next";
 
 const Filters = () => {
  const [toggled, setToggled] = React.useState([""]);
+ const { t, i18n } = useTranslation();
  const dispatch = useAppDispatch();
 
  const handleToggles = (event, isToggled) => {
@@ -50,7 +52,7 @@ const Filters = () => {
       borderRadius: "15px",
      }}
     >
-     Descending prices
+     {t("filters.descendingPrices")}
     </ToggleButton>
     <ToggleButton
      value="Ascending prices"
@@ -60,7 +62,7 @@ const Filters = () => {
       borderRadius: "15px",
      }}
     >
-     Ascending prices
+    {t("filters.descendingPrices")}
     </ToggleButton>
    </ToggleButtonGroup>
   </Stack>

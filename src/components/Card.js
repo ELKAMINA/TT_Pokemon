@@ -16,6 +16,7 @@ import {
 } from "../redux/slices/cartSlice";
 import { pricing } from "../utils/pricing";
 import Pokemon from "./Pokemoninfo";
+import { useTranslation } from "react-i18next";
 
 const Img = styled("img")({
  margin: "auto",
@@ -25,6 +26,8 @@ const Img = styled("img")({
 });
 
 const Card = ({ card }) => {
+ const { t, i18n } = useTranslation();
+
  const dispatch = useAppDispatch();
  const [open, setOpen] = React.useState(false);
  const allItemsInCart = useAppSelector(selectCartItems);
@@ -49,7 +52,7 @@ const Card = ({ card }) => {
 
  useEffect(() => {}, [totalUniqueItem]);
 
- console.log("card", card);
+//  console.log("card", card);
  const content = (
   <Paper
    sx={{
@@ -82,7 +85,7 @@ const Card = ({ card }) => {
        {!totalUniqueItem && (
         <ButtonBase onClick={handleAddToCartClick}>
          <Typography sx={{ cursor: "pointer" }} variant="body2">
-          Add to cart
+          {t("card.addCart")}
          </Typography>
         </ButtonBase>
        )}
