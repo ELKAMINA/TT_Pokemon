@@ -1,11 +1,21 @@
+import React from "react";
+import { useTranslation } from "react-i18next";
 import { Box, Typography } from "@mui/material";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import React, { useEffect } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+
 import { useAppDispatch } from "../redux/hooks/hooks";
 import { setFilters, resetPage } from "../redux/slices/pokemonSlice";
-import { useTranslation } from "react-i18next";
-import Divider from "@mui/material/Divider";
+
+const toggleButtonStyle = {
+ ml: 4,
+ fontFamily: "Pokemon",
+ fontSize: "15px",
+ minWidth: "30px",
+ height: "30px",
+ border: "none",
+ textTransform: "none",
+};
 
 const Filters = () => {
  const [toggled, setToggled] = React.useState([""]);
@@ -29,7 +39,6 @@ const Filters = () => {
    sx={{
     display: "flex",
     alignItems: "center",
-    // backgroundColor: "green",
    }}
   >
    <Box
@@ -67,10 +76,10 @@ const Filters = () => {
      aria-label="pokemon filters"
      onChange={handleToggles}
      sx={{
-      borderRadius: 2, // Adjust as needed
+      borderRadius: 2,
       "& .MuiToggleButtonGroup-grouped": {
        border: 0,
-       borderRadius: 50, // Adjust as needed
+       borderRadius: 50,
        margin: "1px",
        "&.Mui-selected": {
         backgroundColor: "primary.secondary",
@@ -92,13 +101,7 @@ const Filters = () => {
       aria-label="Rarity"
       fullWidth
       sx={{
-       ml: 4,
-       fontFamily: "Pokemon",
-       fontSize: "15px",
-       minWidth: "30px",
-       height: "30px",
-       border: "none",
-       textTransform: "none",
+       ...toggleButtonStyle,
       }}
      >
       Rare Holo
@@ -108,13 +111,7 @@ const Filters = () => {
       value="Descending prices"
       aria-label="low-prices"
       sx={{
-       ml: 4,
-       fontFamily: "Pokemon",
-       fontSize: "15px",
-       minWidth: "30px",
-       height: "30px",
-       border: "none",
-       textTransform: "none",
+       ...toggleButtonStyle,
       }}
       disabled={
        toggled.length && toggled.includes("Ascending prices") ? true : false
@@ -127,13 +124,7 @@ const Filters = () => {
       value="Ascending prices"
       aria-label="high-prices"
       sx={{
-       ml: 4,
-       fontFamily: "Pokemon",
-       fontSize: "15px",
-       minWidth: "30px",
-       height: "30px",
-       border: "none",
-       textTransform: "none",
+       ...toggleButtonStyle,
       }}
       disabled={
        toggled.length && toggled.includes("Descending prices") ? true : false
