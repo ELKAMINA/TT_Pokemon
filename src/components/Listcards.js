@@ -35,6 +35,7 @@ const Listcards = () => {
    // Reset scroll position when a new search is performed
    scrollToTop();
   },
+  // eslint-disable-next-line
   [JSON.stringify(query)],
   [JSON.stringify(filters)]
  );

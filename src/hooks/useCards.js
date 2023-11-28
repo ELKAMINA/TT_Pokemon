@@ -95,6 +95,7 @@ const useCards = () => {
   return () => {
    abortControllerRef.current.abort();
   };
+  // eslint-disable-next-line
  }, [page, query, filters.length, filters, isError]);
 
  return { results, isError, error, hasNextPage };
