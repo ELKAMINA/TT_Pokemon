@@ -40,7 +40,8 @@ const Listcards = () => {
   <Container
    ref={scrollableDivRef}
    sx={{
-    height: "800px",
+    // height: "800px",
+    maxHeight: "100vh",
     minWidth: "80vw",
     overflow: "auto",
     borderRadius: 10,

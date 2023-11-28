@@ -38,7 +38,15 @@ const Cart = () => {
 
  //  console.log("itemsInCart", itemsInCart);
  return (
-  <StyledDrawer anchor="right" open={openCart} onClose={handleCloseCart}>
+  <StyledDrawer
+   anchor="right"
+   open={openCart}
+   onClose={handleCloseCart}
+   sx={{
+    background:
+     "linear-gradient(180deg, #edc228 0%, rgba(52, 102, 174, 0.49) 97%)",
+   }}
+  >
    <Typography
     variant="h2"
     sx={{
