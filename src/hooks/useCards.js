@@ -50,14 +50,14 @@ const useCards = () => {
   }
   getAllCardsPage(page, 50, query, filters, { signal })
    .then((data) => {
-    console.log("Fetched Data:", data.length);
-    setHasNextPage(Boolean(data.length)); // Recall : 0 is false
+    // console.log("Fetched Data:", data.length);
+    setHasNextPage(Boolean(data?.length)); // Recall : 0 is false
     if (query) {
      if (data.length < 50) setHasNextPage(false);
     }
     setResults((prev) => {
      const updatedResults = isNewQuery ? data : [...prev, ...data];
-     console.log("Final result :", updatedResults);
+     //  console.log("Final result :", updatedResults);
      const finalResults = getResultWithFilters(updatedResults, filters);
      return finalResults;
     });
@@ -65,7 +65,7 @@ const useCards = () => {
     setLoading(false);
    })
    .catch((error) => {
-    console.log("ici ?");
+    console.log("ici ?", error);
     setIsError(true);
     if (signal.aborted) return; // If the request is aborted, don't update the state bc error created on purpose
     setError(error);

@@ -4,7 +4,11 @@ import { CircularProgress, Box, Container, Typography } from "@mui/material";
 import Card from "./Card";
 import useCards from "../hooks/useCards";
 import { useAppDispatch, useAppSelector } from "../redux/hooks/hooks";
-import { incrementPage, selectSearchquery } from "../redux/slices/pokemonSlice";
+import {
+ incrementPage,
+ selectSearchquery,
+ setSearchquery,
+} from "../redux/slices/pokemonSlice";
 import { useTranslation } from "react-i18next";
 import Link from "@mui/material/Link";
 
@@ -17,7 +21,7 @@ const Listcards = () => {
 
  useEffect(() => {
   // Reset scroll position when a new search is performed
-  scrollableDivRef.current.scrollTop = 0;
+  if (results?.length > 0) scrollableDivRef.current.scrollTop = 0;
  }, [query]);
 
  const { results, isLoading, isError, error, hasNextPage } = useCards();
@@ -34,7 +38,14 @@ const Listcards = () => {
   }
  };
 
- if (isError) return <Typography>{error.message}</Typography>;
+ if (isError) {
+  dispatch(setSearchquery(""));
+  return (
+   <Typography sx={{ color: "red", fontSize: "3rem", fontWeight: 300 }}>
+    There was an error, please refresh
+   </Typography>
+  );
+ }
 
  return (
   <Container
@@ -118,11 +129,7 @@ const Listcards = () => {
      </Link>
     </Typography>
    </Box>
-   {isError && (
-    <Typography sx={{ fontSize: "100px" }}>
-     Please wait for the data to be fetched entirely to apply filter
-    </Typography>
-   )}
+   {isError && <Typography sx={{ fontSize: "100px" }}></Typography>}
   </Container>
  );
 };

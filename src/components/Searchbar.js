@@ -23,6 +23,8 @@ const Searchbar = () => {
  };
 
  const handleSearchSubmit = () => {
+//   const newInput = input.split(" ");
+//   console.log("newInput", newInput);
   dispatch(setSearchquery(input));
   if (input !== query) {
    dispatch(resetPage());

@@ -10,7 +10,7 @@ const call = async (page, pageSize, searchQuery, filters, options = {}) => {
   );
  } else if (searchQuery === "" && filters.length > 0) {
   if (filters.includes("Holo rare")) {
-   console.log("filters ", filters);
+   //    console.log("filters ", filters);
    return await api.get(
     `/cards?page=${page}&pageSize=${pageSize}&q=rarity:*Holo*`,
     options
