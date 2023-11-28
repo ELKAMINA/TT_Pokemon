@@ -42,12 +42,15 @@ const Listcards = () => {
  const { results, isLoading, isError, error, hasNextPage } = useCards();
 
  const fetchMoreCards = () => {
+  console.log("ici 9 ");
   if (hasNextPage && !loading) {
+   console.log("ici 10 ");
    dispatch(incrementPage());
   }
  };
 
  if (isError) {
+  console.log("ici 11 ");
   dispatch(setSearchquery(""));
   return (
    <Typography sx={{ color: "red", fontSize: "3rem", fontWeight: 300 }}>

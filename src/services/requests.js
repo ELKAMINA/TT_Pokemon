@@ -16,10 +16,11 @@ const call = async (page, pageSize, searchQuery, filters, options = {}) => {
    );
   }
  } else endpoint = `/cards?page=${page}&pageSize=${pageSize}`;
+ console.log("ici 4 ");
 
- console.log("filters ", filters);
- console.log("search ", searchQuery);
- console.log("filters ", endpoint);
+ //  console.log("filters ", filters);
+ //  console.log("search ", searchQuery);
+ //  console.log("filters ", endpoint);
  return await api.get(endpoint, options);
 };
 
@@ -36,6 +37,8 @@ export const getAllCardsPage = async (
   //   console.log("response", response);
   return response.data.data;
  } catch (error) {
+  console.log("ici 5 ");
+
   if (error.name === "CanceledError") {
    console.log("Fetch aborted", error.name);
   }

@@ -1,7 +1,9 @@
 export const uniqueArray = (arr) => {
- arr.filter(
+ if (!arr) return;
+ const r = arr.filter(
   (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
  );
+ return r;
 };
 
 export const compareArrays = (array1, array2) => {

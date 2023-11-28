@@ -138,10 +138,11 @@ export default function Pokemon({ open, setOpen, card }) {
        }}
       >
        {pokInfo.attacks && pokInfo.attacks.attacks
-        ? pokInfo.attacks.attacks.map((el) => {
+        ? pokInfo.attacks.attacks.map((el, index) => {
            return (
-            <>
+            <div key={index}>
              <Typography
+              key={index}
               variant="h4"
               sx={{
                color: "rgb(21, 27, 34)",
@@ -159,6 +160,7 @@ export default function Pokemon({ open, setOpen, card }) {
               }}
              />
              <Typography
+              key={index}
               variant="p"
               sx={{
                color: "rgb(123, 129, 136)",
@@ -170,7 +172,7 @@ export default function Pokemon({ open, setOpen, card }) {
               {" "}
               {el.text}
              </Typography>
-            </>
+            </div>
            );
           })
         : "N/A"}
