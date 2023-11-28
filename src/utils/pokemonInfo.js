@@ -55,7 +55,7 @@ const pokemonInfo = (card) => {
     : `${name}`,
   hp: `HP ${hp}` || "Unknown",
   subtitle: `${supertype} - ${subtypes}`,
-  image: images.large,
+  image: images.small ? images?.small : images.large,
   types: fnTypes(types, hp),
   ability: fnAbility(abilities, powers),
   // rules: fnRules(rules),

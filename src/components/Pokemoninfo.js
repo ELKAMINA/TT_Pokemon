@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Paper from "@mui/material/Paper";
 import Draggable from "react-draggable";
-import { Typography, Divider, Box, Container } from "@mui/material";
+import { Typography, Divider, Box } from "@mui/material";
 import pokemonInfo from "../utils/pokemonInfo";
 
 function PaperComponent(props) {
@@ -45,6 +45,9 @@ export default function Pokemon({ open, setOpen, card }) {
     onClose={handleClose}
     PaperComponent={PaperComponent}
     aria-labelledby="draggable-dialog-title"
+    sx={{
+     height: "100%",
+    }}
    >
     <DialogTitle
      style={{ cursor: "move" }}
@@ -95,12 +98,21 @@ export default function Pokemon({ open, setOpen, card }) {
      sx={{
       display: "flex",
       flexDirection: "row",
+      width: "100%",
+      height: "100%",
+      // backgroundColor: "red",
+      flex: 1,
      }}
     >
      <img
       src={pokInfo.image}
       alt={pokInfo.image}
-      style={{ maxWidth: "700px" }}
+      style={{
+       maxWidth: "90vw",
+       maxHeight: "70vh",
+       width: "auto",
+       height: "auto",
+      }}
      />
      <DialogContentText>
       <Typography

@@ -56,6 +56,7 @@ const useCards = () => {
     }
     setResults((prev) => {
      const updatedResults = isNewQuery ? data : [...prev, ...data];
+     console.log("finalResults", updatedResults);
      const finalResults = getResultWithFilters(updatedResults, filters);
      return finalResults;
     });
@@ -66,7 +67,7 @@ const useCards = () => {
    .catch((error) => {
     console.log("ici ?", error);
     setIsError(true);
-    if (signal.aborted) return; // If the request is aborted, don't update the state bc error created on purpose
+    // if (signal.aborted) return; // If the request is aborted, don't update the state bc error created on purpose
     setError(error);
     setLoading(false);
     dispatch(setLoading(false));

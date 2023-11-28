@@ -10,7 +10,7 @@ import {
 import Item from "./Item";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
-import { pricing } from "../../utils/pricing";
+import { pricing, calculateTotalPrice } from "../../utils/pricing";
 import { useTranslation } from "react-i18next";
 
 const StyledDrawer = styled(Drawer)(({ theme }) => ({
@@ -20,18 +20,11 @@ const StyledDrawer = styled(Drawer)(({ theme }) => ({
 }));
 
 const Cart = () => {
- const { t, i18n } = useTranslation();
+ const { t } = useTranslation();
  const dispatch = useAppDispatch();
  const openCart = useAppSelector(selectOpenCart);
  const itemsInCart = useAppSelector(selectCartItems);
- const calculateTotalPrice = (it) => {
-  return it.reduce((acc, item) => {
-   const itemPrice = item.cardmarket?.prices?.averageSellPrice
-    ? pricing(item.cardmarket?.prices?.averageSellPrice).toFixed(3)
-    : 1;
-   return acc + itemPrice * item.quantity;
-  }, 0);
- };
+
  const handleCloseCart = () => {
   dispatch(setOpenCart(false));
  };
