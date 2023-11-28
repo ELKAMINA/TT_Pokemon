@@ -44,11 +44,16 @@ const pokemonInfo = (card) => {
  //  console.log("supertype ", supertype);
  //  console.log("ability ", abilities);
  //  console.log("weaknesses ", weaknesses);
+ let im;
+ if (nationalPokedexNumbers?.length > 0) {
+  if (nationalPokedexNumbers[0] >= 649) {
+   im =
+    "https://www.freeiconspng.com/thumbs/error-icon/orange-error-icon-0.png";
+  } else
+   im = `https://veekun.com/dex/media/pokemon/dream-world/${nationalPokedexNumbers[0]}.svg`;
+ }
  let newCard = {
-  svgImage:
-   nationalPokedexNumbers?.length > 0
-    ? `https://veekun.com/dex/media/pokemon/dream-world/${nationalPokedexNumbers[0]}.svg`
-    : "",
+  svgImage: im,
   title:
    nationalPokedexNumbers?.length > 0
     ? `${name} #${nationalPokedexNumbers[0]}`

@@ -63,7 +63,7 @@ export default function Pokemon({ open, setOpen, card }) {
       justifyContent: "space-around",
      }}
     >
-     <img src={pokInfo.svgImage} alt="pokemon" />
+     <img src={pokInfo.svgImage} alt="No svg available" />
      <Typography
       sx={{
        color: "rgb(83, 157, 223)",
@@ -106,7 +106,7 @@ export default function Pokemon({ open, setOpen, card }) {
      }}
     >
      <img
-      src={pokInfo.image}
+      src={pokInfo.image ? pokInfo.image : pokInfo.svgImage}
       alt={pokInfo.image}
       style={{
        maxWidth: "90vw",
