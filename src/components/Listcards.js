@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks/hooks";
 import {
  incrementPage,
  selectSearchquery,
+ selectFilters,
  setSearchquery,
 } from "../redux/slices/pokemonSlice";
 import { useTranslation } from "react-i18next";
@@ -16,25 +17,31 @@ const Listcards = () => {
  const { t } = useTranslation();
  const dispatch = useAppDispatch();
  const query = useAppSelector(selectSearchquery);
+ const filters = useAppSelector(selectFilters);
 
  const scrollableDivRef = useRef(null);
 
- useEffect(() => {
-  // Reset scroll position when a new search is performed
-  if (results?.length > 0) scrollableDivRef.current.scrollTop = 0;
- }, [query]);
+ const scrollToTop = () => {
+  if (scrollableDivRef.current) {
+   scrollableDivRef.current.scrollTop = 0;
+  }
+ };
+
+ useEffect(
+  () => {
+   // Reset scroll position when a new search is performed
+   scrollToTop();
+  },
+  [JSON.stringify(query)],
+  [JSON.stringify(filters)]
+ );
+ /* using JSON.stringify for the query to make sure that the component re-renders depending on the value of the array not its ref */
 
  const { results, isLoading, isError, error, hasNextPage } = useCards();
 
  const fetchMoreCards = () => {
   if (hasNextPage && !isLoading) {
    dispatch(incrementPage());
-  }
- };
-
- const scrollToTop = () => {
-  if (scrollableDivRef.current) {
-   scrollableDivRef.current.scrollTop = 0;
   }
  };
 

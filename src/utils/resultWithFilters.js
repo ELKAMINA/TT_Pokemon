@@ -1,5 +1,5 @@
 import { pricing } from "./pricing";
-import { uniqueArray } from "./duplicateCheck";
+import { uniqueArray } from "./arrays";
 
 export const getResultWithFilters = (results, filters) => {
  //  console.log("getResultWithFilters", filters);

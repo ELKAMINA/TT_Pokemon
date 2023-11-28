@@ -9,6 +9,7 @@ import {
  selectSearchquery,
  setSearchquery,
 } from "../redux/slices/pokemonSlice";
+import { compareArrays } from "../utils/arrays";
 import { useTranslation } from "react-i18next";
 
 const Searchbar = () => {
@@ -23,10 +24,11 @@ const Searchbar = () => {
  };
 
  const handleSearchSubmit = () => {
-//   const newInput = input.split(" ");
-//   console.log("newInput", newInput);
-  dispatch(setSearchquery(input));
-  if (input !== query) {
+  const newInput = input.split(" ");
+  //   console.log("newInput", newInput);
+  dispatch(setSearchquery(newInput));
+  console.log(compareArrays(newInput, query));
+  if (!compareArrays(newInput, query)) {
    dispatch(resetPage());
   }
  };

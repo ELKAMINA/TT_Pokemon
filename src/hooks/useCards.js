@@ -7,8 +7,10 @@ import {
  selectPage,
  setFilters,
  setSearchquery,
+ resetPage,
 } from "../redux/slices/pokemonSlice";
 import { getResultWithFilters } from "../utils/resultWithFilters";
+import { compareArrays } from "../utils/arrays";
 
 const useCards = () => {
  const [results, setResults] = useState([]);
@@ -20,33 +22,28 @@ const useCards = () => {
 
  const query = useAppSelector(selectSearchquery);
  const page = useAppSelector(selectPage);
- const lastQuery = useRef("");
+ const lastQuery = useRef([]);
  const lastFilter = useRef([]);
  const filters = useAppSelector(selectFilters);
 
  useEffect(() => {
   const abortController = new AbortController();
   const signal = abortController.signal;
-  console.log("USECARD filter = ", filters);
+  //   console.log("USECARD filter = ", filters);
   setLoading(true);
   setIsError(false);
   setError({});
 
   /* ***** */
-  console.log("lastqury", lastQuery.current);
-  console.log("query", query);
-  console.log("filters.length ", filters.length);
-  console.log("lastFilters.current ", lastFilter.current.length);
-  const isNewQuery = query !== lastQuery.current;
+  //   console.log("lastqury", lastQuery.current);
+  //   console.log("query", query);
+  //   console.log("filters.length ", filters.length);
+  //   console.log("lastFilters.current ", lastFilter.current.length);
+  const isNewQuery = compareArrays(lastQuery.current, query) ? false : true;
   const isNewFilter = filters.length !== lastFilter.current.length;
   if (isNewQuery || isNewFilter || (isNewQuery && isNewFilter)) {
-   //   abortController.abort();
-   //    console.log("lastqury", lastQuery.current);
-   //    console.log("query", query);
-   //    console.log("filters.length ", filters.length);
-   //    console.log("lastFilters.current ", lastFilter.current.length);
-   //    console.log("newQuery ", isNewQuery);
    setResults([]);
+   dispatch(resetPage());
   }
   getAllCardsPage(page, 50, query, filters, { signal })
    .then((data) => {
@@ -57,7 +54,7 @@ const useCards = () => {
     }
     setResults((prev) => {
      const updatedResults = isNewQuery ? data : [...prev, ...data];
-     //  console.log("Final result :", updatedResults);
+     console.log("Final result :", updatedResults);
      const finalResults = getResultWithFilters(updatedResults, filters);
      return finalResults;
     });
@@ -75,9 +72,9 @@ const useCards = () => {
   lastQuery.current = query;
   lastFilter.current = filters;
 
-  return () => {
-   abortController.abort();
-  };
+  //   return () => {
+  //    abortController.abort();
+  //   };
  }, [page, query, filters.length, filters, isError]);
 
  return { results, isLoading, isError, error, hasNextPage };

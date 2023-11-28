@@ -1,31 +1,26 @@
 import api from "../config/axios";
 
 const call = async (page, pageSize, searchQuery, filters, options = {}) => {
+ let endpoint = "";
+ if (searchQuery.length > 0 && filters.length === 0) {
+  endpoint = getSearchQueries(searchQuery, page, pageSize);
+ } else if (searchQuery.length === 0 && filters.length > 0) {
+  if (filters.includes("Holo rare")) {
+   endpoint = `/cards?page=${page}&pageSize=${pageSize}&q=rarity:*Holo*`;
+  } else endpoint = `/cards?page=${page}&pageSize=${pageSize}`;
+ } else if (searchQuery.length > 0 && filters.length > 0) {
+  endpoint = getSearchQueries(searchQuery, page, pageSize);
+  if (filters.includes("Holo rare")) {
+   endpoint = getSearchQueries(searchQuery, page, pageSize).concat(
+    " rarity:*Holo*"
+   );
+  }
+ } else endpoint = `/cards?page=${page}&pageSize=${pageSize}`;
+
  console.log("filters ", filters);
- if (searchQuery && filters.length === 0) {
-  searchQuery = searchQuery.toLowerCase();
-  return await api.get(
-   `/cards?page=${page}&pageSize=${pageSize}&q=name:*${searchQuery}*`,
-   options
-  );
- } else if (searchQuery === "" && filters.length > 0) {
-  if (filters.includes("Holo rare")) {
-   //    console.log("filters ", filters);
-   return await api.get(
-    `/cards?page=${page}&pageSize=${pageSize}&q=rarity:*Holo*`,
-    options
-   );
-  }
- } else if (searchQuery && filters.length > 0) {
-  searchQuery = searchQuery.toLowerCase();
-  if (filters.includes("Holo rare")) {
-   return await api.get(
-    `/cards?page=${page}&pageSize=${pageSize}&q=name:*${searchQuery}* rarity:*Holo*`,
-    options
-   );
-  }
- }
- return await api.get(`/cards?page=${page}&pageSize=${pageSize}`, options);
+ console.log("search ", searchQuery);
+ console.log("filters ", endpoint);
+ return await api.get(endpoint, options);
 };
 
 // Get all pokemon cards
@@ -45,4 +40,10 @@ export const getAllCardsPage = async (
    console.log("Fetch aborted", error.name);
   }
  }
+};
+
+const getSearchQueries = (searchQuery, page, pageSize) => {
+ const queryParts = searchQuery.map((item) => `name:*${item}*`);
+ const queryString = queryParts.join(" ");
+ return `/cards?page=${page}&pageSize=${pageSize}&q=${queryString}`;
 };

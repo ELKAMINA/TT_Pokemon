@@ -8,7 +8,7 @@ const initialState = {
  loading: true,
  isLoaded: false,
  page: 1,
- searchQuery: "",
+ searchQuery: [],
  filters: [],
 };
 

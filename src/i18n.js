@@ -52,7 +52,7 @@ i18n
      },
      listcard: {
       loadingData: "Les données arrivent...",
-      loadingEnd: "C'est la fin!",
+      loadingEnd: "La fin justifie les moyens ...",
       goTop: "Retour en haut",
      },
      filters: {

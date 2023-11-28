@@ -3,17 +3,16 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import React, { useEffect } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import { useAppDispatch } from "../redux/hooks/hooks";
-import { setFilters } from "../redux/slices/pokemonSlice";
+import { setFilters, resetPage } from "../redux/slices/pokemonSlice";
 import { useTranslation } from "react-i18next";
 import Divider from "@mui/material/Divider";
 
 const Filters = () => {
  const [toggled, setToggled] = React.useState([""]);
- const { t, i18n } = useTranslation();
+ const { t } = useTranslation();
  const dispatch = useAppDispatch();
 
  const handleToggles = (event, isToggled) => {
-  console.log("isToggled", isToggled);
   if (!isToggled.length) {
    setToggled([]);
    dispatch(setFilters([]));
@@ -22,6 +21,7 @@ const Filters = () => {
    const array = isToggled.filter((item) => item !== "");
    setToggled(array);
    dispatch(setFilters(array));
+   dispatch(resetPage());
   }
  };
  return (
