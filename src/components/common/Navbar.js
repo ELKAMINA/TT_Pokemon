@@ -1,14 +1,15 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Badge from "@mui/material/Badge";
+import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import Tooltip from "@mui/material/Tooltip";
+import { styled } from "@mui/material/styles";
+import Container from "@mui/material/Container";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import Tooltip from "@mui/material/Tooltip";
-import Badge from "@mui/material/Badge";
-import { styled } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
 import { useAppSelector, useAppDispatch } from "../../redux/hooks/hooks";
 import {
  selectTotalItems,
@@ -28,18 +29,14 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const Navbar = () => {
- const totalItems = useAppSelector(selectTotalItems);
  const { t, i18n } = useTranslation();
-
  const dispatch = useAppDispatch();
  const total = useAppSelector(selectCartItems);
+ const totalItems = useAppSelector(selectTotalItems);
 
  const handleCartClick = (event) => {
-  //   console.log("OK cliqué");
   dispatch(setOpenCart(true));
  };
-
- console.log("totalItems", total);
 
  React.useEffect(() => {}, [totalItems]);
  const changeLanguage = (language) => {
@@ -47,14 +44,7 @@ const Navbar = () => {
  };
 
  return (
-  <AppBar
-   position="static"
-   sx={{
-    height: "7vh",
-
-    backgroundColor: "#3466AE",
-   }}
-  >
+  <AppBar position="static" sx={{ height: "7vh", backgroundColor: "#3466AE" }}>
    <Container maxWidth="xl">
     <Toolbar
      disableGutters
@@ -63,7 +53,6 @@ const Navbar = () => {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      //   alignContent: "center",
      }}
     >
      <Box>
