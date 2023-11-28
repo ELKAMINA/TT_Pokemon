@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Container, Box } from "@mui/material";
+
+import Filters from "../components/Filters";
+import Cart from "../components/common/Cart";
 import Listcards from "../components/Listcards";
 import Searchbar from "../components/Searchbar";
-import Filters from "../components/Filters";
 import Navbar from "../components/common/Navbar";
-import Cart from "../components/common/Cart";
 
 const Main = () => {
  return (
