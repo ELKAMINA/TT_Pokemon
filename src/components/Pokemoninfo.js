@@ -7,7 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Paper from "@mui/material/Paper";
 import Draggable from "react-draggable";
-import { Typography, Divider } from "@mui/material";
+import { Typography, Divider, Box, Container } from "@mui/material";
 import pokemonInfo from "../utils/pokemonInfo";
 
 function PaperComponent(props) {
@@ -52,19 +52,45 @@ export default function Pokemon({ open, setOpen, card }) {
      sx={{
       width: "100%",
       height: "20%",
-      backgroundColor: "beige",
+      // backgroundColor: "beige",
       padding: 2,
       display: "flex",
       alignItems: "center",
-      justifyContent: "space-between",
+      justifyContent: "space-around",
      }}
     >
      <img src={pokInfo.svgImage} alt="pokemon" />
-     <Typography>{pokInfo.hp}</Typography>
-     <Typography>{pokInfo?.title ? pokInfo.title : ""}</Typography>
-     <Typography>{pokInfo.subtitle}</Typography>
+     <Typography
+      sx={{
+       color: "rgb(83, 157, 223)",
+       fontSize: "2rem",
+       fontFamily: "Montserrat,sans-serif",
+      }}
+     >
+      {pokInfo.hp}
+     </Typography>
+     <Typography
+      sx={{
+       color: "rgb(78, 87, 97)",
+       fontSize: "4rem",
+       fontWeight: "bold",
+       fontFamily: "Montserrat,sans-serif",
+      }}
+     >
+      {pokInfo?.title ? pokInfo.title : ""}
+     </Typography>
+     <Typography
+      sx={{
+       color: "rgb(78, 87, 97)",
+       fontSize: "2rem",
+       fontWeight: 300,
+       fontFamily: "Montserrat,sans-serif",
+      }}
+     >
+      {pokInfo.subtitle}
+     </Typography>
     </DialogTitle>
-    <Divider />
+    <Divider sx={{ mb: 5 }} />
     <DialogContent
      sx={{
       display: "flex",
@@ -77,28 +103,122 @@ export default function Pokemon({ open, setOpen, card }) {
       style={{ maxWidth: "700px" }}
      />
      <DialogContentText>
-      <Typography variant="h6">
-       {pokInfo.attacks?.title ? pokInfo.attacks.title : ""}
+      <Typography
+       variant="h6"
+       sx={{
+        color: "rgb(78, 87, 97)",
+        fontSize: "2rem",
+        fontWeight: 400,
+        fontFamily: "Montserrat,sans-serif",
+        m: 3,
+       }}
+      >
+       {pokInfo.attacks?.title ? pokInfo.attacks.title : "Attacks"}
       </Typography>
-      <Typography variant="h6">
+      <Box
+       variant="h6"
+       sx={{
+        color: "rgb(21, 27, 34)",
+        fontSize: "2rem",
+        fontWeight: 300,
+        m: 3,
+        fontFamily: "Montserrat,sans-serif",
+       }}
+      >
        {pokInfo.attacks && pokInfo.attacks.attacks
-        ? pokInfo.attacks.attacks.map(
-           (el) => el.name + " \n" + el.damage + " \n" + el.text
-          )
+        ? pokInfo.attacks.attacks.map((el) => {
+           return (
+            <>
+             <Typography
+              variant="h4"
+              sx={{
+               color: "rgb(21, 27, 34)",
+               fontSize: "2rem",
+               mt: 5,
+               fontWeight: 300,
+               fontFamily: "Montserrat,sans-serif",
+              }}
+             >
+              {el.name} {el.damage}
+             </Typography>
+             <Divider
+              sx={{
+               m: 1,
+              }}
+             />
+             <Typography
+              variant="p"
+              sx={{
+               color: "rgb(123, 129, 136)",
+               fontSize: "1.5rem",
+               fontWeight: 300,
+               fontFamily: "Montserrat,sans-serif",
+              }}
+             >
+              {" "}
+              {el.text}
+             </Typography>
+            </>
+           );
+          })
         : "N/A"}
-      </Typography>
+      </Box>
      </DialogContentText>
-     <DialogContentText>
-      <Typography variant="h6">
-       {pokInfo.weaknesses?.map((el) => el.type + " " + el.value)}
-      </Typography>
-     </DialogContentText>
-     <DialogContentText>
-      <Typography variant="h6">{pokInfo.rarity}</Typography>
-     </DialogContentText>
-     <DialogContentText>
-      <Typography variant="h6">{pokInfo.artist}</Typography>
-     </DialogContentText>
+     <DialogContent
+      sx={{
+       display: "flex",
+       flexWrap: "wrap",
+       flexDirection: "column",
+       //  backgroundColor: "yellow",
+       justifyContent: "space-around",
+       alignItems: "center",
+       width: "100%",
+       textAlign: "left",
+      }}
+     >
+      <DialogContentText>
+       <Typography
+        variant="h4"
+        sx={{
+         color: "rgb(123, 129, 136)",
+         fontSize: "1.5rem",
+         fontWeight: 300,
+         fontFamily: "Montserrat,sans-serif",
+        }}
+       >
+        <span>Weaknesses</span> :{" "}
+        {pokInfo.weaknesses?.map((el) => el.type + " " + el.value)}
+       </Typography>
+      </DialogContentText>
+      <DialogContentText>
+       <Typography
+        variant="h4"
+        sx={{
+         color: "rgb(123, 129, 136)",
+         fontSize: "1.5rem",
+         fontWeight: 300,
+         fontFamily: "Montserrat,sans-serif",
+        }}
+       >
+        {" "}
+        Rarity: {pokInfo.rarity}
+       </Typography>
+      </DialogContentText>
+      <DialogContentText>
+       <Typography
+        variant="h4"
+        sx={{
+         color: "rgb(123, 129, 136)",
+         fontSize: "1.5rem",
+         fontWeight: 300,
+         fontFamily: "Montserrat,sans-serif",
+        }}
+       >
+        {" "}
+        Artist: {pokInfo.artist}
+       </Typography>
+      </DialogContentText>
+     </DialogContent>
     </DialogContent>
     <DialogActions>
      <Button autoFocus onClick={handleClose}>
