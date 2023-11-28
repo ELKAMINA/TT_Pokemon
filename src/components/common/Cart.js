@@ -51,6 +51,7 @@ const Cart = () => {
     variant="h2"
     sx={{
      margin: "20px 0px 50px 20px",
+     color: "#19356b",
     }}
    >
     {t("cart.title")}
@@ -60,12 +61,14 @@ const Cart = () => {
      return (
       <>
        <Item key={index + 1} card={item} />
-       <Divider />
+       <Divider sx={{ mb: 3 }} />
       </>
      );
     })}
    {itemsInCart.length === 0 && (
-    <Typography variant="h3">{t("cart.empty")}</Typography>
+    <Typography variant="h3" sx={{ color: "#19356b" }}>
+     {t("cart.empty")}
+    </Typography>
    )}
    <Typography
     variant="h1"
@@ -73,6 +76,7 @@ const Cart = () => {
      margin: "20px 0px 50px 20px",
      fontSize: "50px",
      fontWeight: 400,
+     color: "#19356b",
     }}
    >
     Total : {calculateTotalPrice(itemsInCart) + "€"}

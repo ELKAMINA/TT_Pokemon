@@ -35,16 +35,14 @@ function Item({ card }) {
  };
 
  return (
-  <Container
-  //   sx={{ backgroundColor: "orange" }}
-  >
-   <Box
-   //    sx={{ backgroundColor: "grey" }}
-   >
+  <Container sx={{ elevation: 10 }}>
+   <Box>
     <Typography
      variant="h4"
      sx={{
       marginBottom: "10px",
+      color: "#cea616",
+      fontWeight: "bold",
      }}
     >
      {card.name + " - " + card.supertype}
@@ -59,9 +57,12 @@ function Item({ card }) {
       marginTop: "20px",
      }}
     >
-     <Typography variant="p"> {t("cart.unitPrice")}: {cardPrice + "€"}</Typography>
-     <Typography variant="p">
-     {t("cart.totalPrice")}: {(totalUniqueItem * cardPrice).toFixed(2) + "€"}
+     <Typography variant="h6" sx={{ color: "#3974d3" }}>
+      {" "}
+      {t("cart.unitPrice")}: {cardPrice + "€"}
+     </Typography>
+     <Typography variant="h6" sx={{ color: "#3974d3" }}>
+      {t("cart.totalPrice")}: {(totalUniqueItem * cardPrice).toFixed(2) + "€"}
      </Typography>
     </Box>
 
@@ -69,8 +70,10 @@ function Item({ card }) {
      sx={{
       display: "flex",
       flexDirection: "row",
-      justifyContent: "space-between",
+      justifyContent: "space-around",
       alignItems: "center",
+      //   backgroundColor: "yellow",
+      minHeight: "300px",
      }}
     >
      <RemoveCircleIcon sx={{ cursor: "pointer" }} onClick={handleRemoveItem} />
@@ -86,7 +89,20 @@ function Item({ card }) {
       disabled
      />
      <AddCircleIcon sx={{ cursor: "pointer" }} onClick={handleAddToCartClick} />
-     <img className="item-cart-img" src={card.images?.small} alt={card.name} />
+     <Box
+      sx={{
+       //    backgroundColor: "green",
+       minHeight: "300px",
+       minWidth: "250px",
+      }}
+     >
+      <img
+       className="item-cart-img"
+       src={card.images?.large}
+       alt={card.name}
+       style={{ minWidth: "100%", height: "100%" }}
+      />
+     </Box>
     </Box>
    </Box>
   </Container>
