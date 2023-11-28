@@ -3,10 +3,11 @@ export const pricing = (price) => {
 };
 
 export const calculateTotalPrice = (it) => {
-    return it.reduce((acc, item) => {
-     const itemPrice = item.cardmarket?.prices?.averageSellPrice
-      ? pricing(item.cardmarket?.prices?.averageSellPrice).toFixed(3)
-      : 1;
-     return acc + itemPrice * item.quantity;
-    }, 0);
+ if (!it) return;
+ return it?.reduce((acc, item) => {
+  const itemPrice = item.cardmarket?.prices?.averageSellPrice
+   ? pricing(item.cardmarket?.prices?.averageSellPrice).toFixed(3)
+   : 1;
+  return acc + itemPrice * item.quantity;
+ }, 0);
 };

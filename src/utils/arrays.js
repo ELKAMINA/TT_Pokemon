@@ -1,6 +1,6 @@
 export const uniqueArray = (arr) => {
  if (!arr) return;
- const r = arr.filter(
+ const r = arr?.filter(
   (obj, index, self) => index === self.findIndex((t) => t.id === obj.id)
  );
  return r;

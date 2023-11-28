@@ -12,38 +12,20 @@ const pokemonInfo = (card) => {
  if (typeof card === "string") return card;
 
  const {
-  id,
   name,
   supertype,
   subtypes,
   hp,
   types,
-  evolvesFrom,
   abilities,
   attacks,
   weaknesses,
-  retreatCost,
-  convertedRetreatCost,
-  set,
-  number,
   artist,
   rarity,
-  flavorText,
   nationalPokedexNumbers,
-  legalities,
   images,
-  tcgplayer,
-  cardmarket,
  } = card;
 
- //  console.log("hp ", hp);
- //  console.log("name ", name);
- //  console.log("nationalPokedexNumber ", nationalPokedexNumbers);
- //  console.log("types  ", types);
- //  console.log("subtype ", subtypes);
- //  console.log("supertype ", supertype);
- //  console.log("ability ", abilities);
- //  console.log("weaknesses ", weaknesses);
  let im;
  if (nationalPokedexNumbers?.length > 0) {
   if (nationalPokedexNumbers[0] >= 649) {
@@ -63,16 +45,10 @@ const pokemonInfo = (card) => {
   image: images.small ? images?.small : images.large,
   types: fnTypes(types, hp),
   ability: fnAbility(abilities, powers),
-  // rules: fnRules(rules),
   attacks: fnAttacks(attacks),
-  // miscellaneous: fnMiscellaneous({
   weaknesses,
-  //  //  resistances,
-  //  retreatCost,
   artist,
   rarity,
-  //  set,
-  // }),
  };
 
  return newCard;
@@ -100,15 +76,6 @@ const fnAbility = (data = null, powers) =>
     }
   : null;
 
-//RULES
-const fnRules = (data = null) =>
- data
-  ? {
-     title: "Rules",
-     text: data,
-    }
-  : null;
-
 //ATTACKS
 const fnAttacks = (data = null) => {
  let newData = null;
@@ -131,47 +98,7 @@ const fnAttacks = (data = null) => {
    attacks: dataAttacks,
   };
  }
-
  return newData;
 };
-
-//OTHERS
-// const fnMiscellaneous = (data) => {
-//  const { weaknesses, retreatCost, artist, rarity, set } = data;
-
-//  const others = [
-//   { title: "Weakness", data: fnMergeData(weaknesses) },
-//   { title: "Retreat Cost", data: fnRetreatCost(retreatCost) },
-//   { title: "Artist", data: fnMergeData(artist) },
-//   { title: "Rarity", data: fnMergeData(rarity) },
-//   { title: "Set", data: fnMergeData(set) },
-//  ];
-
-//  return fnFormatBoxes(others);
-// };
-
-const fnMergeData = (data) => {
- if (typeof data === "string") {
-  return [{ value: data || "N/A" }];
- }
-
- return data || [{ value: "N/A" }];
-};
-
-// const fnRetreatCost = (data) => {
-//  let newData = fnMergeData(data);
-//  if (data) newData = data.map((type) => ({ type }));
-//  return newData;
-// };
-
-// const fnFormatBoxes = (data) => {
-//  return data?.map(({ title, data }) => {
-//   const boxes = data?.map(({ type: name, value: text }) => {
-//    return { index: uuidv4(), name, text, size: "xsmall" };
-//   });
-
-//   return { title, boxes };
-//  });
-// };
 
 export default pokemonInfo;

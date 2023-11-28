@@ -2,7 +2,6 @@ import { pricing } from "./pricing";
 import { uniqueArray } from "./arrays";
 
 export const getResultWithFilters = (results, filters) => {
- //  console.log("getResultWithFilters", filters);
  if (filters?.length > 0) {
   filters?.forEach((element) => {
    switch (element) {
@@ -36,6 +35,5 @@ export const getResultWithFilters = (results, filters) => {
   });
  }
  let resultWithoutDuplicates = uniqueArray(results);
- console.log("result avant doublons", resultWithoutDuplicates);
  return resultWithoutDuplicates;
 };
