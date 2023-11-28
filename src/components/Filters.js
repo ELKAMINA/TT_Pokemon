@@ -1,10 +1,11 @@
-import { Stack } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import React, { useEffect } from "react";
 import ToggleButton from "@mui/material/ToggleButton";
 import { useAppDispatch } from "../redux/hooks/hooks";
 import { setFilters } from "../redux/slices/pokemonSlice";
 import { useTranslation } from "react-i18next";
+import Divider from "@mui/material/Divider";
 
 const Filters = () => {
  const [toggled, setToggled] = React.useState([""]);
@@ -24,60 +25,124 @@ const Filters = () => {
   }
  };
  return (
-  <Stack>
-   <ToggleButtonGroup
-    value={toggled}
-    aria-label="pokemon filters"
-    onChange={handleToggles}
+  <Box
+   sx={{
+    display: "flex",
+    alignItems: "center",
+    // backgroundColor: "green",
+   }}
+  >
+   <Box
+    sx={{
+     display: "flex",
+     flexDirection: "row",
+     justifyContent: "center",
+    }}
    >
-    {/* <ToggleButton
-     value="All"
-     aria-label="all"
+    <Typography
      sx={{
-      margin: "2%",
-      borderRadius: "15px",
+      fontFamily: "Pokemon",
+      fontSize: "15px",
+      fontWeight: "bold",
+      width: "100%",
+      height: "30px",
+      border: "none",
+      m: 1,
      }}
     >
-     All
-    </ToggleButton> */}
-    <ToggleButton
-     value="Holo rare"
-     aria-label="Rarity"
+     {t("filters.choice")}
+    </Typography>
+   </Box>
+   <Box
+    sx={{
+     width: "150%",
+     display: "flex",
+     flexDirection: "row",
+     justifyContent: "center",
+    }}
+   >
+    <ToggleButtonGroup
+     value={toggled}
+     aria-label="pokemon filters"
+     onChange={handleToggles}
      sx={{
-      margin: "2%",
-      borderRadius: "15px",
+      borderRadius: 2, // Adjust as needed
+      "& .MuiToggleButtonGroup-grouped": {
+       border: 0,
+       borderRadius: 50, // Adjust as needed
+       margin: "1px",
+       "&.Mui-selected": {
+        backgroundColor: "primary.secondary",
+       },
+       "&:not(:first-of-type)": {
+        borderRadius: 2,
+       },
+       "&:first-of-type": {
+        borderRadius: 2,
+       },
+       "&:last-of-type": {
+        borderRadius: 2,
+       },
+      },
      }}
     >
-     Holo rare
-    </ToggleButton>
-    <ToggleButton
-     value="Descending prices"
-     aria-label="low-prices"
-     sx={{
-      margin: "2%",
-      borderRadius: "15px",
-     }}
-     disabled={
-      toggled.length && toggled.includes("Ascending prices") ? true : false
-     }
-    >
-     {t("filters.descendingPrices")}
-    </ToggleButton>
-    <ToggleButton
-     value="Ascending prices"
-     aria-label="high-prices"
-     sx={{
-      margin: "2%",
-      borderRadius: "15px",
-     }}
-     disabled={
-      toggled.length && toggled.includes("Descending prices") ? true : false
-     }
-    >
-     {t("filters.ascendingPrices")}
-    </ToggleButton>
-   </ToggleButtonGroup>
-  </Stack>
+     <ToggleButton
+      value="Holo rare"
+      aria-label="Rarity"
+      fullWidth
+      sx={{
+       m: 1,
+       fontFamily: "Pokemon",
+       fontSize: "10px",
+       fontWeight: "bold",
+       width: "100%",
+       height: "30px",
+       border: "none",
+      }}
+     >
+      Holo rare
+     </ToggleButton>
+     <ToggleButton
+      fullWidth
+      value="Descending prices"
+      aria-label="low-prices"
+      sx={{
+       m: 1,
+       fontFamily: "Pokemon",
+       fontSize: "10px",
+       fontWeight: "bold",
+       width: "100%",
+       height: "30px",
+       border: "none",
+      }}
+      disabled={
+       toggled.length && toggled.includes("Ascending prices") ? true : false
+      }
+     >
+      {t("filters.descendingPrices")}
+     </ToggleButton>
+     <ToggleButton
+      fullWidth
+      value="Ascending prices"
+      aria-label="high-prices"
+      sx={{
+       m: 1,
+       fontFamily: "Pokemon",
+       fontSize: "10px",
+       fontWeight: "bold",
+       width: "100%",
+       height: "30px",
+       border: "none",
+      }}
+      disabled={
+       toggled.length && toggled.includes("Descending prices") ? true : false
+      }
+     >
+      {t("filters.ascendingPrices")}
+     </ToggleButton>
+    </ToggleButtonGroup>
+   </Box>
+  </Box>
  );
 };
 

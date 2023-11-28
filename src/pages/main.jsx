@@ -26,6 +26,8 @@ const Main = () => {
       flexDirection: "column",
       m: 4,
       alignItems: "center",
+      //   backgroundColor: "cyan",
+      width: "100%",
      }}
     >
      <Box>

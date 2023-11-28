@@ -34,10 +34,10 @@ const Searchbar = () => {
    sx={{
     display: "flex",
     flexDirection: "row",
-    backgroundColor: "yellow",
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
+    mb: 2,
    }}
   >
    <TextField
@@ -48,7 +48,12 @@ const Searchbar = () => {
     value={input}
     sx={{ width: "50%", m: 1 }}
    />
-   <SearchIcon onClick={handleSearchSubmit} fontSize="large" color="#19356b" />
+   <SearchIcon
+    onClick={handleSearchSubmit}
+    fontSize="large"
+    color="#19356b"
+    sx={{ cursor: "pointer" }}
+   />
   </Box>
  );
 };

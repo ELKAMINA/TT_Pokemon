@@ -30,6 +30,7 @@ i18n
      filters: {
       descendingPrices: "Descending prices",
       ascendingPrices: "Ascending prices",
+      choice: "Filters: ",
      },
      card: {
       addCart: "Add to cart",
@@ -55,6 +56,7 @@ i18n
      filters: {
       descendingPrices: "Prix descendants",
       ascendingPrices: "Prix ascendants",
+      choice: "Filtres: ",
      },
      card: {
       addCart: "Ajouter au panier",
