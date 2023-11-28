@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
-import debounce from "lodash.debounce";
-import SearchIcon from "@mui/icons-material/Search";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import TextField from "@mui/material/TextField";
+import SearchIcon from "@mui/icons-material/Search";
+
 import { useAppDispatch, useAppSelector } from "../redux/hooks/hooks";
 import {
  resetPage,
@@ -10,7 +11,6 @@ import {
  setSearchquery,
 } from "../redux/slices/pokemonSlice";
 import { compareArrays } from "../utils/arrays";
-import { useTranslation } from "react-i18next";
 
 const Searchbar = () => {
  const { t } = useTranslation();
@@ -25,9 +25,7 @@ const Searchbar = () => {
 
  const handleSearchSubmit = () => {
   const newInput = input.split(" ");
-  //   console.log("newInput", newInput);
   dispatch(setSearchquery(newInput));
-  console.log(compareArrays(newInput, query));
   if (!compareArrays(newInput, query)) {
    dispatch(resetPage());
   }
