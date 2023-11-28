@@ -9,6 +9,7 @@ import {
  selectSearchquery,
  selectFilters,
  setSearchquery,
+ selectLoading,
 } from "../redux/slices/pokemonSlice";
 import { useTranslation } from "react-i18next";
 import Link from "@mui/material/Link";
@@ -18,6 +19,7 @@ const Listcards = () => {
  const dispatch = useAppDispatch();
  const query = useAppSelector(selectSearchquery);
  const filters = useAppSelector(selectFilters);
+ const loading = useAppSelector(selectLoading);
 
  const scrollableDivRef = useRef(null);
 
@@ -40,7 +42,7 @@ const Listcards = () => {
  const { results, isLoading, isError, error, hasNextPage } = useCards();
 
  const fetchMoreCards = () => {
-  if (hasNextPage && !isLoading) {
+  if (hasNextPage && !loading) {
    dispatch(incrementPage());
   }
  };
@@ -58,14 +60,12 @@ const Listcards = () => {
   <Container
    ref={scrollableDivRef}
    sx={{
-    // height: "800px",
-    maxHeight: "100vh",
+    minHeight: "50vh",
     minWidth: "80vw",
     overflow: "auto",
     borderRadius: 10,
     background:
      "linear-gradient(180deg, #edc228 0%, rgba(52, 102, 174, 0.49) 97%)",
-    // backgroundColor: "yellow",
    }}
    id="scrollableDiv"
   >
@@ -75,7 +75,7 @@ const Listcards = () => {
      next={fetchMoreCards} // fetches next data. Contains previous and next data
      hasMore={hasNextPage}
      loader={
-      isLoading && (
+      loading && (
        <Box
         sx={{
          display: "flex",

@@ -7,14 +7,16 @@ import {
  selectPage,
  setFilters,
  setSearchquery,
+ setLoading,
  resetPage,
+ selectLoading,
 } from "../redux/slices/pokemonSlice";
 import { getResultWithFilters } from "../utils/resultWithFilters";
 import { compareArrays } from "../utils/arrays";
 
 const useCards = () => {
  const [results, setResults] = useState([]);
- const [isLoading, setLoading] = useState(false);
+ //  const [isLoading, setLoading] = useState(false);
  const [isError, setIsError] = useState(false);
  const [error, setError] = useState([]);
  const [hasNextPage, setHasNextPage] = useState(false);
@@ -30,7 +32,7 @@ const useCards = () => {
   const abortController = new AbortController();
   const signal = abortController.signal;
   //   console.log("USECARD filter = ", filters);
-  setLoading(true);
+  dispatch(setLoading(true));
   setIsError(false);
   setError({});
 
@@ -49,17 +51,17 @@ const useCards = () => {
    .then((data) => {
     // console.log("Fetched Data:", data.length);
     setHasNextPage(Boolean(data?.length)); // Recall : 0 is false
-    if (query) {
+    if (query.length > 0 || filters.length > 0) {
      if (data.length < 50) setHasNextPage(false);
     }
     setResults((prev) => {
      const updatedResults = isNewQuery ? data : [...prev, ...data];
-     console.log("Final result :", updatedResults);
      const finalResults = getResultWithFilters(updatedResults, filters);
      return finalResults;
     });
 
     setLoading(false);
+    dispatch(setLoading(false));
    })
    .catch((error) => {
     console.log("ici ?", error);
@@ -67,6 +69,7 @@ const useCards = () => {
     if (signal.aborted) return; // If the request is aborted, don't update the state bc error created on purpose
     setError(error);
     setLoading(false);
+    dispatch(setLoading(false));
    });
 
   lastQuery.current = query;
@@ -77,7 +80,7 @@ const useCards = () => {
   //   };
  }, [page, query, filters.length, filters, isError]);
 
- return { results, isLoading, isError, error, hasNextPage };
+ return { results, isError, error, hasNextPage };
 };
 
 export default useCards;

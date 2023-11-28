@@ -72,7 +72,6 @@ function Item({ card }) {
       flexDirection: "row",
       justifyContent: "space-around",
       alignItems: "center",
-      //   backgroundColor: "yellow",
       minHeight: "300px",
      }}
     >
@@ -91,7 +90,6 @@ function Item({ card }) {
      <AddCircleIcon sx={{ cursor: "pointer" }} onClick={handleAddToCartClick} />
      <Box
       sx={{
-       //    backgroundColor: "green",
        minHeight: "300px",
        minWidth: "250px",
       }}

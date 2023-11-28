@@ -98,7 +98,7 @@ const Cart = () => {
      color: "#19356b",
     }}
    >
-    Total : {calculateTotalPrice(itemsInCart) + "€"}
+    Total : {calculateTotalPrice(itemsInCart).toFixed(2) + "€"}
    </Typography>
   </StyledDrawer>
  );

@@ -37,12 +37,13 @@ const Filters = () => {
      display: "flex",
      flexDirection: "row",
      justifyContent: "center",
+     alignItems: "center",
     }}
    >
     <Typography
      sx={{
       fontFamily: "Pokemon",
-      fontSize: "15px",
+      fontSize: "18px",
       fontWeight: "bold",
       width: "100%",
       height: "30px",
@@ -91,13 +92,13 @@ const Filters = () => {
       aria-label="Rarity"
       fullWidth
       sx={{
-       m: 1,
+       ml: 4,
        fontFamily: "Pokemon",
-       fontSize: "12px",
-       fontWeight: "bold",
-       width: "100%",
+       fontSize: "15px",
+       minWidth: "30px",
        height: "30px",
        border: "none",
+       textTransform: "none",
       }}
      >
       Rare Holo
@@ -107,13 +108,13 @@ const Filters = () => {
       value="Descending prices"
       aria-label="low-prices"
       sx={{
-       m: 1,
+       ml: 4,
        fontFamily: "Pokemon",
-       fontSize: "12px",
-       fontWeight: "bold",
-       width: "100%",
+       fontSize: "15px",
+       minWidth: "30px",
        height: "30px",
        border: "none",
+       textTransform: "none",
       }}
       disabled={
        toggled.length && toggled.includes("Ascending prices") ? true : false
@@ -126,13 +127,13 @@ const Filters = () => {
       value="Ascending prices"
       aria-label="high-prices"
       sx={{
-       m: 1,
+       ml: 4,
        fontFamily: "Pokemon",
-       fontSize: "12px",
-       fontWeight: "bold",
-       width: "100%",
+       fontSize: "15px",
+       minWidth: "30px",
        height: "30px",
        border: "none",
+       textTransform: "none",
       }}
       disabled={
        toggled.length && toggled.includes("Descending prices") ? true : false
