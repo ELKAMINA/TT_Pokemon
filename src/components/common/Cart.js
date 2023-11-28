@@ -69,7 +69,7 @@ const Cart = () => {
    {itemsInCart.length > 0 ? (
     itemsInCart.map((item, index) => {
      return (
-      <React.Fragment key={index.id}>
+      <React.Fragment key={item.id}>
        <Item card={item} />
        <Divider sx={{ mb: 3 }} />
       </React.Fragment>
