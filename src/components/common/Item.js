@@ -1,25 +1,26 @@
 import React from "react";
+import { TextField } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Container, Box, Typography } from "@mui/material";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+
 import {
  selectCartItems,
  addItemToCart,
  deleteItemFromCart,
 } from "../../redux/slices/cartSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import { TextField } from "@mui/material";
 import "../../styles/items.styles.css";
 import { pricing } from "../../utils/pricing";
-import { useTranslation } from "react-i18next";
+
 
 function Item({ card }) {
- const { t, i18n } = useTranslation();
-
+ const { t } = useTranslation();
  const allItemsInCart = useAppSelector(selectCartItems);
  const totalUniqueItem = allItemsInCart.find(
   (item) => item.id === card.id
- )?.quantity;
+ )?.quantity; // total per unit item (depending on the quantity)
 
  const cardPrice = card.cardmarket?.prices?.averageSellPrice
   ? pricing(card.cardmarket?.prices?.averageSellPrice).toFixed(2)
@@ -95,7 +96,6 @@ function Item({ card }) {
       }}
      >
       <img
-       className="item-cart-img"
        src={card.images?.large}
        alt={card.name}
        style={{ minWidth: "100%", height: "100%" }}
