@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { getAllCardsPage } from "../services/requests";
-import { useAppSelector } from "../redux/hooks/hooks";
+import { useAppSelector, useAppDispatch } from "../redux/hooks/hooks";
 import {
  selectSearchquery,
  selectFilters,
  selectPage,
+ setFilters,
+ setSearchquery,
 } from "../redux/slices/pokemonSlice";
 import { getResultWithFilters } from "../utils/resultWithFilters";
 
@@ -14,6 +16,7 @@ const useCards = () => {
  const [isError, setIsError] = useState(false);
  const [error, setError] = useState([]);
  const [hasNextPage, setHasNextPage] = useState(false);
+ const dispatch = useAppDispatch();
 
  const query = useAppSelector(selectSearchquery);
  const page = useAppSelector(selectPage);
@@ -62,6 +65,7 @@ const useCards = () => {
     setLoading(false);
    })
    .catch((error) => {
+    console.log("ici ?");
     setIsError(true);
     if (signal.aborted) return; // If the request is aborted, don't update the state bc error created on purpose
     setError(error);
@@ -72,13 +76,9 @@ const useCards = () => {
   lastFilter.current = filters;
 
   return () => {
-   // Check if it's a component unmount or a query change
-   //    if (!isUnmounting.current) {
-   //     // Only abort if it's not a component unmount
    abortController.abort();
   };
-  //   };
- }, [page, query, filters.length, filters]);
+ }, [page, query, filters.length, filters, isError]);
 
  return { results, isLoading, isError, error, hasNextPage };
 };

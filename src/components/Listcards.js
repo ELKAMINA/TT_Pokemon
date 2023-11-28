@@ -83,6 +83,11 @@ const Listcards = () => {
      </Link>
     </Typography>
    </Box>
+   {isError && (
+    <Typography sx={{ fontSize: "100px" }}>
+     Please wait for the data to be fetched entirely to apply filter
+    </Typography>
+   )}
   </Container>
  );
 };

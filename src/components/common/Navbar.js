@@ -29,7 +29,7 @@ const Navbar = () => {
 
  const dispatch = useAppDispatch();
  const handleCartClick = (event) => {
-//   console.log("OK cliqué");
+  //   console.log("OK cliqué");
   dispatch(setOpenCart(true));
  };
 
@@ -42,17 +42,21 @@ const Navbar = () => {
   <AppBar
    position="static"
    sx={{
-    height: "8vh",
+    height: "7vh",
+    display: "flex",
+    flexDirection: "row",
+    backgroundColor: "#3466AE",
    }}
   >
-   <Container
-    maxWidth="xl"
-    sx={{
-     display: "flex",
-     justifyContent: "space-between",
-    }}
-   >
-    <Toolbar disableGutters>
+   <Container maxWidth="xl">
+    <Toolbar
+     disableGutters
+     sx={{
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+     }}
+    >
      <Box>
       <Typography
        variant="h6"
@@ -64,31 +68,70 @@ const Navbar = () => {
         fontFamily: "monospace",
         fontWeight: 700,
         letterSpacing: ".3rem",
-        color: "inherit",
         textDecoration: "none",
+        color: "#ffcb09",
        }}
       >
        Pokemon TCG
       </Typography>
      </Box>
-     <Box sx={{ flexGrow: 0 }}>
+
+     <Box
+      sx={{
+       flexGrow: 0,
+       display: "flex",
+       flexDirection: "row",
+       alignItems: "center",
+      }}
+     >
       <Tooltip title="See cart">
        <IconButton aria-label="cart" onClick={handleCartClick}>
         <StyledBadge badgeContent={totalItems} color="secondary">
-         <ShoppingCartIcon />
+         <ShoppingCartIcon fontSize="large" color="#19356b" />
         </StyledBadge>
        </IconButton>
       </Tooltip>
-     </Box>
-     <Box>
-      <Avatar
-       src="https://p7.hiclipart.com/preview/14/79/689/flag-of-france-flag-of-italy-national-flag-france.jpg"
-       onClick={() => changeLanguage("fr")}
-      />
-      <Avatar
-       src="https://w7.pngwing.com/pngs/64/514/png-transparent-flag-of-great-britain-flag-of-the-united-kingdom-english-flag-miscellaneous-angle-english.png"
-       onClick={() => changeLanguage("en")}
-      />
+      <Box
+       sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-around",
+        m: 4,
+       }}
+      >
+       <IconButton
+        sx={{
+         width: "30px",
+         height: "25px",
+        }}
+        onClick={() => changeLanguage("fr")}
+       >
+        <img
+         src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/1200px-Flag_of_France.svg.png"
+         alt="France flag"
+         style={{
+          width: "20px",
+          height: "15px",
+         }}
+        />
+       </IconButton>
+       <IconButton
+        sx={{
+         width: "30px",
+         height: "25px",
+        }}
+        onClick={() => changeLanguage("en")}
+       >
+        <img
+         src="https://upload.wikimedia.org/wikipedia/commons/8/83/Flag_of_the_United_Kingdom_%283-5%29.svg"
+         alt="British flag"
+         style={{
+          width: "20px",
+          height: "15px",
+         }}
+        />
+       </IconButton>
+      </Box>
      </Box>
     </Toolbar>
    </Container>

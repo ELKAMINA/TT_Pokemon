@@ -41,8 +41,8 @@ export const getAllCardsPage = async (
   //   console.log("response", response);
   return response.data.data;
  } catch (error) {
-  if (error.name === "AbortError") {
-   console.log("Fetch aborted");
+  if (error.name === "CanceledError") {
+   console.log("Fetch aborted", error.name);
   }
  }
 };
