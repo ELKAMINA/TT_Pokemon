@@ -1,5 +1,9 @@
 import React from "react";
+import Button from "@mui/material/Button";
+import Divider from "@mui/material/Divider";
+import { useTranslation } from "react-i18next";
 import { Drawer, Typography, styled, Box } from "@mui/material";
+
 import { useAppSelector, useAppDispatch } from "../../redux/hooks/hooks";
 import {
  selectOpenCart,
@@ -8,10 +12,7 @@ import {
  resetCart,
 } from "../../redux/slices/cartSlice";
 import Item from "./Item";
-import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
-import { pricing, calculateTotalPrice } from "../../utils/pricing";
-import { useTranslation } from "react-i18next";
+import { calculateTotalPrice } from "../../utils/pricing";
 
 const StyledDrawer = styled(Drawer)(({ theme }) => ({
  ".MuiDrawer-paper": {
@@ -60,21 +61,21 @@ const Cart = () => {
      {t("cart.title")}
     </Typography>
     {itemsInCart.length > 0 && (
-     <Button size="small" sx={{ m: 2, color: "#3880f4" }} onClick={clearCart}>
+     <Button sx={{ m: 2, color: "#3880f4" }} onClick={clearCart}>
       {t("cart.delete")}
      </Button>
     )}
    </Box>
-   {itemsInCart.length > 0 &&
+   {itemsInCart.length > 0 ? (
     itemsInCart.map((item, index) => {
      return (
-      <>
-       <Item key={index + 1} card={item} />
+      <React.Fragment key={index.id}>
+       <Item card={item} />
        <Divider sx={{ mb: 3 }} />
-      </>
+      </React.Fragment>
      );
-    })}
-   {itemsInCart.length === 0 && (
+    })
+   ) : (
     <Typography
      variant="h6"
      sx={{ color: "#19356b", margin: "20px 0px 50px 20px" }}
