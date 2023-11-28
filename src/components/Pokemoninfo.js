@@ -1,15 +1,16 @@
 import * as React from "react";
+import { v4 as uuidv4 } from "uuid";
+import Draggable from "react-draggable";
+import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import { Typography, Divider, Box } from "@mui/material";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import Paper from "@mui/material/Paper";
-import Draggable from "react-draggable";
-import { Typography, Divider, Box } from "@mui/material";
+
 import pokemonInfo from "../utils/pokemonInfo";
-import { v4 as uuidv4 } from "uuid";
 
 function PaperComponent(props) {
  return (
@@ -36,7 +37,6 @@ export default function Pokemon({ open, setOpen, card }) {
  };
 
  React.useEffect(() => {
-  //   console.log("card retravaillée", pokInfo);
  }, [card.id]);
 
  return (
@@ -56,7 +56,6 @@ export default function Pokemon({ open, setOpen, card }) {
      sx={{
       width: "100%",
       height: "20%",
-      // backgroundColor: "beige",
       padding: 2,
       display: "flex",
       alignItems: "center",
@@ -101,7 +100,6 @@ export default function Pokemon({ open, setOpen, card }) {
       flexDirection: "row",
       width: "100%",
       height: "100%",
-      // backgroundColor: "red",
       flex: 1,
      }}
     >
@@ -183,7 +181,6 @@ export default function Pokemon({ open, setOpen, card }) {
        display: "flex",
        flexWrap: "wrap",
        flexDirection: "column",
-       //  backgroundColor: "yellow",
        justifyContent: "space-around",
        alignItems: "center",
        width: "100%",
@@ -214,7 +211,6 @@ export default function Pokemon({ open, setOpen, card }) {
          fontFamily: "Montserrat,sans-serif",
         }}
        >
-        {" "}
         Rarity: {pokInfo.rarity}
        </Typography>
       </DialogContentText>
@@ -228,7 +224,6 @@ export default function Pokemon({ open, setOpen, card }) {
          fontFamily: "Montserrat,sans-serif",
         }}
        >
-        {" "}
         Artist: {pokInfo.artist}
        </Typography>
       </DialogContentText>
