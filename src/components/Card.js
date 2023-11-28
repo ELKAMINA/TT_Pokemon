@@ -125,14 +125,22 @@ const Card = ({ card }) => {
         </ColorButton>
        )}
        {totalUniqueItem > 0 && (
-        <Box>
+        <Box
+         sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+          alignItems: "center",
+          // m: 1,
+         }}
+        >
          <RemoveCircleIcon
           sx={{ cursor: "pointer" }}
           onClick={handleRemoveItem}
          />
          <TextField
           sx={{
-           width: "40%",
+           width: 70,
            textAlign: "center",
            cursor: "default",
           }}
