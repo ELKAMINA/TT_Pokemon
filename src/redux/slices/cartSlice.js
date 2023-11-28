@@ -37,13 +37,18 @@ const cartSlice = createSlice({
     state.cartTotalAmount -= item.price;
    }
   },
+  resetCart: (state) => {
+   state.cartItems = [];
+   state.cartTotalQuantity = 0;
+   state.cartTotalAmount = 0;
+  },
   setOpenCart: (state, action) => {
    state.openCart = action.payload;
   },
  },
 });
 
-export const { addItemToCart, deleteItemFromCart, setOpenCart } =
+export const { addItemToCart, deleteItemFromCart, setOpenCart, resetCart } =
  cartSlice.actions;
 
 export const selectTotalItems = (state) =>

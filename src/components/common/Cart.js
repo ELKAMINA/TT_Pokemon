@@ -1,12 +1,14 @@
 import React from "react";
-import { Drawer, Typography, styled } from "@mui/material";
+import { Drawer, Typography, styled, Box } from "@mui/material";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks/hooks";
 import {
  selectOpenCart,
  setOpenCart,
  selectCartItems,
+ resetCart,
 } from "../../redux/slices/cartSlice";
 import Item from "./Item";
+import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import { pricing } from "../../utils/pricing";
 import { useTranslation } from "react-i18next";
@@ -27,8 +29,6 @@ const Cart = () => {
    const itemPrice = item.cardmarket?.prices?.averageSellPrice
     ? pricing(item.cardmarket?.prices?.averageSellPrice).toFixed(3)
     : 1;
-   //    console.log("itemPrice", itemPrice);
-   //    console.log("itemQuantity", item.quantity);
    return acc + itemPrice * item.quantity;
   }, 0);
  };
@@ -36,7 +36,10 @@ const Cart = () => {
   dispatch(setOpenCart(false));
  };
 
- //  console.log("itemsInCart", itemsInCart);
+ const clearCart = () => {
+  dispatch(resetCart());
+ };
+
  return (
   <StyledDrawer
    anchor="right"
@@ -47,15 +50,28 @@ const Cart = () => {
      "linear-gradient(180deg, #edc228 0%, rgba(52, 102, 174, 0.49) 97%)",
    }}
   >
-   <Typography
-    variant="h2"
+   <Box
     sx={{
-     margin: "20px 0px 50px 20px",
-     color: "#19356b",
+     display: "flex",
+     flexDirection: "row",
+     justifyContent: "space-between",
     }}
    >
-    {t("cart.title")}
-   </Typography>
+    <Typography
+     variant="h2"
+     sx={{
+      margin: "20px 0px 50px 20px",
+      color: "#19356b",
+     }}
+    >
+     {t("cart.title")}
+    </Typography>
+    {itemsInCart.length > 0 && (
+     <Button size="small" sx={{ m: 2, color: "#3880f4" }} onClick={clearCart}>
+      {t("cart.delete")}
+     </Button>
+    )}
+   </Box>
    {itemsInCart.length > 0 &&
     itemsInCart.map((item, index) => {
      return (
@@ -66,7 +82,10 @@ const Cart = () => {
      );
     })}
    {itemsInCart.length === 0 && (
-    <Typography variant="h3" sx={{ color: "#19356b" }}>
+    <Typography
+     variant="h6"
+     sx={{ color: "#19356b", margin: "20px 0px 50px 20px" }}
+    >
      {t("cart.empty")}
     </Typography>
    )}

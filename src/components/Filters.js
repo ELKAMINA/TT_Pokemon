@@ -93,14 +93,14 @@ const Filters = () => {
       sx={{
        m: 1,
        fontFamily: "Pokemon",
-       fontSize: "10px",
+       fontSize: "12px",
        fontWeight: "bold",
        width: "100%",
        height: "30px",
        border: "none",
       }}
      >
-      Holo rare
+      Rare Holo
      </ToggleButton>
      <ToggleButton
       fullWidth
@@ -109,7 +109,7 @@ const Filters = () => {
       sx={{
        m: 1,
        fontFamily: "Pokemon",
-       fontSize: "10px",
+       fontSize: "12px",
        fontWeight: "bold",
        width: "100%",
        height: "30px",
@@ -128,7 +128,7 @@ const Filters = () => {
       sx={{
        m: 1,
        fontFamily: "Pokemon",
-       fontSize: "10px",
+       fontSize: "12px",
        fontWeight: "bold",
        width: "100%",
        height: "30px",

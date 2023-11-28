@@ -38,9 +38,10 @@ i18n
      },
      cart: {
       title: "Your cart",
-      empty: "Your cart is empty",
+      empty: "No items added",
       unitPrice: "Unit price",
       totalPrice: "Total price",
+      delete: "Empty cart",
      },
     },
    },
@@ -65,9 +66,10 @@ i18n
      },
      cart: {
       title: "Votre panier",
-      empty: "Votre panier est vide",
+      empty: "Aucun article ajouté",
       unitPrice: "Prix unitaire",
       totalPrice: "Prix total",
+      delete: "Vider le panier",
      },
     },
    },

@@ -100,8 +100,9 @@ const Navbar = () => {
       >
        <IconButton
         sx={{
-         width: "30px",
-         height: "25px",
+         width: "20px",
+         height: "15px",
+         mr: 3,
         }}
         onClick={() => changeLanguage("fr")}
        >
@@ -116,8 +117,8 @@ const Navbar = () => {
        </IconButton>
        <IconButton
         sx={{
-         width: "30px",
-         height: "25px",
+         width: "20px",
+         height: "15px",
         }}
         onClick={() => changeLanguage("en")}
        >
