@@ -43,8 +43,7 @@ const Navbar = () => {
    position="static"
    sx={{
     height: "7vh",
-    display: "flex",
-    flexDirection: "row",
+
     backgroundColor: "#3466AE",
    }}
   >
@@ -55,6 +54,8 @@ const Navbar = () => {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-between",
+      alignItems: "center",
+      //   alignContent: "center",
      }}
     >
      <Box>
