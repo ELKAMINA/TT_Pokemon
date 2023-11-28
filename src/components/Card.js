@@ -1,16 +1,15 @@
-import React, { useEffect } from "react";
-import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
+import React, { useEffect } from "react";
+import { TextField } from "@mui/material";
+import Button from "@mui/material/Button";
+import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
-import { TextField } from "@mui/material";
 import ButtonBase from "@mui/material/ButtonBase";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-
-import Button from "@mui/material/Button";
 
 import { useAppDispatch, useAppSelector } from "../redux/hooks/hooks";
 import {
@@ -38,23 +37,19 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 const Card = ({ card }) => {
- const { t, i18n } = useTranslation();
-
  const dispatch = useAppDispatch();
+ const { t } = useTranslation();
  const [open, setOpen] = React.useState(false);
  const allItemsInCart = useAppSelector(selectCartItems);
  const totalUniqueItem = allItemsInCart.find(
   (item) => item.id === card.id
  )?.quantity;
- //  console.log("totalItemsInCart", allItemsInCart);
- //  console.log("totalItems", totalUniqueItem);
- //  console.log("card id", card.id);
+
  const handleAddToCartClick = () => {
   dispatch(addItemToCart(card));
  };
 
  const handleRemoveItem = () => {
-  // console.log("je rentre ici ", card.name);
   dispatch(deleteItemFromCart(card));
  };
 
@@ -132,7 +127,6 @@ const Card = ({ card }) => {
           flexDirection: "row",
           justifyContent: "space-around",
           alignItems: "center",
-          // m: 1,
          }}
         >
          <RemoveCircleIcon
