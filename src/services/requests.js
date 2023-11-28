@@ -2,6 +2,7 @@ import api from "../config/axios";
 
 const call = async (page, pageSize, searchQuery, filters, options = {}) => {
  let endpoint = "";
+
  if (searchQuery.length > 0 && filters.length === 0) {
   endpoint = getSearchQueries(searchQuery, page, pageSize);
  } else if (searchQuery.length === 0 && filters.length > 0) {
@@ -16,15 +17,9 @@ const call = async (page, pageSize, searchQuery, filters, options = {}) => {
    );
   }
  } else endpoint = `/cards?page=${page}&pageSize=${pageSize}`;
- console.log("ici 4 ");
-
- //  console.log("filters ", filters);
- //  console.log("search ", searchQuery);
- //  console.log("filters ", endpoint);
  return await api.get(endpoint, options);
 };
 
-// Get all pokemon cards
 export const getAllCardsPage = async (
  page,
  pageSize,
@@ -34,13 +29,10 @@ export const getAllCardsPage = async (
 ) => {
  try {
   const response = await call(page, pageSize, query, filters, options);
-  //   console.log("response", response);
   return response.data.data;
  } catch (error) {
-  console.log("ici 5 ");
-
   if (error.name === "CanceledError") {
-   console.log("Fetch aborted", error.name);
+   console.error("Fetch aborted");
   }
  }
 };

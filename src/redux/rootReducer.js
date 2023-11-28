@@ -7,7 +7,6 @@ const rootPersistConfig = {
  key: "root",
  storage,
  keyPrefix: "redux-",
- balcklist: ["pokemon"],
 };
 
 const rootReducer = combineReducers({
