@@ -43,7 +43,10 @@ const Listcards = () => {
     height: "800px",
     minWidth: "80vw",
     overflow: "auto",
-    backgroundColor: "yellow",
+    borderRadius: 10,
+    background:
+     "linear-gradient(180deg, #edc228 0%, rgba(52, 102, 174, 0.49) 97%)",
+    // backgroundColor: "yellow",
    }}
    id="scrollableDiv"
   >
@@ -85,7 +88,6 @@ const Listcards = () => {
       sx={{
        display: "flex",
        flexWrap: "wrap",
-       backgroundColor: "cyan",
        justifyContent: "center",
       }}
      >
@@ -108,7 +110,8 @@ const Listcards = () => {
       onClick={scrollToTop}
       style={{ cursor: "pointer" }}
       component="button"
-      variant="body2"
+      variant="h6"
+      sx={{ m: 2 }}
      >
       {t("listcard.goTop")}
      </Link>
