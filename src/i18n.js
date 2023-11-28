@@ -23,7 +23,7 @@ i18n
       label: "Search a pokemon...",
      },
      listcard: {
-      loadingData: "More data is loading...",
+      loadingData: "Data is loading...",
       loadingEnd: "That's all folks!",
       goTop: "Go to top",
      },
@@ -33,7 +33,8 @@ i18n
       choice: "Filters: ",
      },
      card: {
-      addCart: "Add to cart",
+      addCart: "Add",
+      price: "Unit price: ",
      },
      cart: {
       title: "Your cart",
@@ -49,7 +50,7 @@ i18n
       label: "Trouve ton pokemon...",
      },
      listcard: {
-      loadingData: "La suite arrive...",
+      loadingData: "Les données arrivent...",
       loadingEnd: "C'est la fin!",
       goTop: "Retour en haut",
      },
@@ -59,7 +60,8 @@ i18n
       choice: "Filtres: ",
      },
      card: {
-      addCart: "Ajouter au panier",
+      addCart: "Ajouter",
+      price: "Prix unitaire: ",
      },
      cart: {
       title: "Votre panier",

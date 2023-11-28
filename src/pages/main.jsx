@@ -20,13 +20,13 @@ const Main = () => {
      minWidth: "100vw",
     }}
    >
+    {/* Searchbar && Filters */}
     <Box
      sx={{
       display: "flex",
       flexDirection: "column",
       m: 4,
       alignItems: "center",
-      //   backgroundColor: "cyan",
       width: "100%",
      }}
     >
@@ -45,6 +45,8 @@ const Main = () => {
      <Searchbar />
      <Filters />
     </Box>
+    {/* *** */}
+
     <Listcards />
     <Cart />
    </Container>

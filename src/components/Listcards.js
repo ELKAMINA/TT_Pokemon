@@ -40,10 +40,10 @@ const Listcards = () => {
   <Container
    ref={scrollableDivRef}
    sx={{
-    maxHeight: "800px",
+    height: "800px",
+    minWidth: "80vw",
     overflow: "auto",
     backgroundColor: "yellow",
-    padding: "16px",
    }}
    id="scrollableDiv"
   >
@@ -54,18 +54,49 @@ const Listcards = () => {
      hasMore={hasNextPage}
      loader={
       isLoading && (
-       <>
-        <Typography> {t("listcard.loadingData")} </Typography>
+       <Box
+        sx={{
+         display: "flex",
+         flexDirection: "column",
+         alignItems: "center",
+         justifyContent: "center",
+         m: 2,
+        }}
+       >
+        <Typography
+         sx={{ m: 2, fontSize: "20px", fontWeight: "bold", color: "#3762ac" }}
+        >
+         {t("listcard.loadingData")}
+        </Typography>
         <CircularProgress />
-       </>
+       </Box>
       )
      }
-     endMessage={<Typography> {t("listcard.loadingEnd")} </Typography>}
+     endMessage={
+      <Typography
+       sx={{ m: 2, fontSize: "20px", fontWeight: "bold", color: "#3762ac" }}
+      >
+       {t("listcard.loadingEnd")}
+      </Typography>
+     }
      scrollableTarget="scrollableDiv"
     >
-     <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+     <Box
+      sx={{
+       display: "flex",
+       flexWrap: "wrap",
+       backgroundColor: "cyan",
+       justifyContent: "center",
+      }}
+     >
       {results?.map((pokemon, index) => (
-       <Box key={index} sx={{ m: 3 }}>
+       <Box
+        key={index}
+        sx={{
+         m: 2,
+         maxWidth: "800px",
+        }}
+       >
         <Card card={pokemon}></Card>
        </Box>
       ))}

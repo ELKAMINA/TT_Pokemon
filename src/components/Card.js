@@ -8,6 +8,10 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import { TextField } from "@mui/material";
 import ButtonBase from "@mui/material/ButtonBase";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+
+import Button from "@mui/material/Button";
+
 import { useAppDispatch, useAppSelector } from "../redux/hooks/hooks";
 import {
  addItemToCart,
@@ -24,6 +28,14 @@ const Img = styled("img")({
  maxWidth: "100%",
  maxHeight: "100%",
 });
+
+const ColorButton = styled(Button)(({ theme }) => ({
+ color: theme.palette.getContrastText("#406eb7"),
+ backgroundColor: "#406eb7",
+ "&:hover": {
+  backgroundColor: "#edc228",
+ },
+}));
 
 const Card = ({ card }) => {
  const { t, i18n } = useTranslation();
@@ -52,42 +64,65 @@ const Card = ({ card }) => {
 
  useEffect(() => {}, [totalUniqueItem]);
 
-//  console.log("card", card);
  const content = (
   <Paper
    sx={{
     p: 2,
     margin: "auto",
-    maxWidth: 500,
+    width: "500px",
+    height: "300px",
     flexGrow: 1,
-    backgroundColor: (theme) =>
-     theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+    "&:hover ": {
+     backgroundColor: "#f1f1f1",
+    },
+    borderRadius: "10px",
    }}
   >
-   <Grid container spacing={2}>
+   <Grid container>
     <Grid item>
-     <ButtonBase sx={{ width: 128, height: 128 }} onClick={handlePokClick}>
+     <ButtonBase sx={{ width: 300, height: 250 }} onClick={handlePokClick}>
       <Img alt="complex" src={card.images?.large} />
      </ButtonBase>
     </Grid>
     <Grid item xs={12} sm container>
-     <Grid item xs container direction="column" spacing={2}>
+     <Grid item xs container direction="column">
       <Grid item xs>
-       <Typography gutterBottom variant="subtitle1" component="div">
+       <Typography
+        variant="subtitle1"
+        component="h1"
+        sx={{ fontSize: 25, fontWeight: "bold", color: "#3762ac" }}
+       >
         {card.name}
        </Typography>
        <Typography variant="body2" gutterBottom></Typography>
-       <Typography variant="body2" color="text.secondary">
+       <Typography variant="body2" color="#cca108" sx={{ fontSize: 20 }}>
         {card.rarity}
+       </Typography>
+       <Typography
+        variant="subtitle1"
+        component="div"
+        sx={{
+         fontWeight: "italic",
+         fontSize: 12,
+        }}
+       >
+        {t("card.price")}:{" "}
+        {card.cardmarket?.prices?.averageSellPrice
+         ? pricing(card.cardmarket?.prices?.averageSellPrice).toFixed(2) + " €"
+         : 1 + " €"}
        </Typography>
       </Grid>
       <Grid item>
        {!totalUniqueItem && (
-        <ButtonBase onClick={handleAddToCartClick}>
-         <Typography sx={{ cursor: "pointer" }} variant="body2">
-          {t("card.addCart")}
-         </Typography>
-        </ButtonBase>
+        <ColorButton
+         onClick={handleAddToCartClick}
+         variant="contained"
+         size="medium"
+         sx={{ color: "white" }}
+         endIcon={<AddShoppingCartIcon />}
+        >
+         {t("card.addCart")}
+        </ColorButton>
        )}
        {totalUniqueItem > 0 && (
         <Box>
@@ -113,19 +148,6 @@ const Card = ({ card }) => {
         </Box>
        )}
       </Grid>
-     </Grid>
-     <Grid item>
-      <Typography
-       variant="subtitle1"
-       component="div"
-       sx={{
-        marginLeft: "10px",
-       }}
-      >
-       {card.cardmarket?.prices?.averageSellPrice
-        ? pricing(card.cardmarket?.prices?.averageSellPrice).toFixed(2) + " €"
-        : 1 + " €"}
-      </Typography>
      </Grid>
     </Grid>
    </Grid>
