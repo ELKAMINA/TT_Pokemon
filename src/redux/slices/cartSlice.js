@@ -53,6 +53,8 @@ export const { addItemToCart, deleteItemFromCart, setOpenCart, resetCart } =
 
 export const selectTotalItems = (state) =>
  state.persistedReducer.cart.cartTotalQuantity;
+export const selectTotalAmount = (state) =>
+ state.persistedReducer.cart.cartTotalAmount;
 export const selectCartItems = (state) => state.persistedReducer.cart.cartItems;
 export const selectOpenCart = (state) => state.persistedReducer.cart.openCart;
 

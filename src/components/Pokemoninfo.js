@@ -9,6 +9,7 @@ import Paper from "@mui/material/Paper";
 import Draggable from "react-draggable";
 import { Typography, Divider, Box } from "@mui/material";
 import pokemonInfo from "../utils/pokemonInfo";
+import { v4 as uuidv4 } from "uuid";
 
 function PaperComponent(props) {
  return (
@@ -116,6 +117,7 @@ export default function Pokemon({ open, setOpen, card }) {
      />
      <DialogContentText>
       <Typography
+       component="div"
        variant="h6"
        sx={{
         color: "rgb(78, 87, 97)",
@@ -140,9 +142,8 @@ export default function Pokemon({ open, setOpen, card }) {
        {pokInfo.attacks && pokInfo.attacks.attacks
         ? pokInfo.attacks.attacks.map((el, index) => {
            return (
-            <div key={index}>
+            <div key={uuidv4()}>
              <Typography
-              key={index}
               variant="h4"
               sx={{
                color: "rgb(21, 27, 34)",
@@ -160,7 +161,6 @@ export default function Pokemon({ open, setOpen, card }) {
               }}
              />
              <Typography
-              key={index}
               variant="p"
               sx={{
                color: "rgb(123, 129, 136)",

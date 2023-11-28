@@ -7,12 +7,16 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Tooltip from "@mui/material/Tooltip";
 import Badge from "@mui/material/Badge";
-import { Avatar } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useAppSelector, useAppDispatch } from "../../redux/hooks/hooks";
-import { selectTotalItems, setOpenCart } from "../../redux/slices/cartSlice";
+import {
+ selectTotalItems,
+ setOpenCart,
+ selectCartItems,
+} from "../../redux/slices/cartSlice";
 import { useTranslation } from "react-i18next";
+import { calculateTotalPrice } from "../../utils/pricing";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
  "& .MuiBadge-badge": {
@@ -28,10 +32,14 @@ const Navbar = () => {
  const { t, i18n } = useTranslation();
 
  const dispatch = useAppDispatch();
+ const total = useAppSelector(selectCartItems);
+
  const handleCartClick = (event) => {
   //   console.log("OK cliqué");
   dispatch(setOpenCart(true));
  };
+
+ console.log("totalItems", total);
 
  React.useEffect(() => {}, [totalItems]);
  const changeLanguage = (language) => {
@@ -84,13 +92,23 @@ const Navbar = () => {
        alignItems: "center",
       }}
      >
-      <Tooltip title="See cart">
+      <Tooltip title={t("cart.see")}>
        <IconButton aria-label="cart" onClick={handleCartClick}>
         <StyledBadge badgeContent={totalItems} color="secondary">
          <ShoppingCartIcon fontSize="large" color="#19356b" />
         </StyledBadge>
        </IconButton>
       </Tooltip>
+      <Typography
+       sx={{
+        ml: 4,
+        mr: 3,
+        fontWeight: 600,
+        color: "white",
+       }}
+      >
+       {t("cart.totalPrice")} : {calculateTotalPrice(total)?.toFixed(2)} €
+      </Typography>
       <Box
        sx={{
         display: "flex",
