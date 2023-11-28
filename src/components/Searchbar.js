@@ -12,7 +12,7 @@ import {
 import { useTranslation } from "react-i18next";
 
 const Searchbar = () => {
- const { t} = useTranslation();
+ const { t } = useTranslation();
  const [input, setInput] = useState("");
  const dispatch = useAppDispatch();
  const query = useAppSelector(selectSearchquery);
@@ -30,15 +30,25 @@ const Searchbar = () => {
  };
 
  return (
-  <Box>
+  <Box
+   sx={{
+    display: "flex",
+    flexDirection: "row",
+    backgroundColor: "yellow",
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+   }}
+  >
    <TextField
     id="outlined-basic"
     label={t("searchbar.label")}
     variant="outlined"
     onChange={handleSearchInput}
     value={input}
+    sx={{ width: "50%", m: 1 }}
    />
-   <SearchIcon onClick={handleSearchSubmit} />
+   <SearchIcon onClick={handleSearchSubmit} fontSize="large" color="#19356b" />
   </Box>
  );
 };

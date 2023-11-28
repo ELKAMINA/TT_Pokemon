@@ -63,10 +63,9 @@ const Navbar = () => {
        noWrap
        component="a"
        sx={{
-        mr: 2,
         display: { xs: "none", md: "flex" },
         fontFamily: "monospace",
-        fontWeight: 700,
+        fontWeight: 800,
         letterSpacing: ".3rem",
         textDecoration: "none",
         color: "#ffcb09",
