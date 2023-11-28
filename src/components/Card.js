@@ -73,10 +73,11 @@ const Card = ({ card }) => {
     height: "300px",
     flexGrow: 1,
     "&:hover ": {
-     backgroundColor: "#f1f1f1",
+     backgroundColor: "#f2ebd2",
     },
     borderRadius: "10px",
    }}
+   elevation={10}
   >
    <Grid container>
     <Grid item>
